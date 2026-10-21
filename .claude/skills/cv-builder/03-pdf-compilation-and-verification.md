@@ -2,40 +2,58 @@
 
 ## How it works
 
-`compile_all_pdfs.py` walks `_generated/` (override with the `CV_OUTPUT_DIR` environment variable) and converts every `.md` file in each subfolder to PDF. It finds Microsoft Edge automatically at the standard install paths, or via `EDGE_PATH`:
+`compile_all_pdfs.py` converts every `.md` in `<workspace>/_generated/<Folder>/` to PDF:
 
-1. Markdown → HTML via the `markdown` library, wrapped in a fixed template (Inter font, `.cv-header` flexbox styles).
-2. The page is rendered at a deliberately oversized height (`OVERSIZED_PAGE_HEIGHT_MM = 2000`) via headless Microsoft Edge (`--print-to-pdf`), so content can never overflow onto a second page.
-3. `pdf_crop.py`'s `crop_pdf_to_content()` then measures the actual content's bottom edge (text blocks + vector drawings like the header's CSS border + any embedded images) via PyMuPDF and sets the PDF's CropBox to exactly that height plus a small margin — eliminating the trailing whitespace that the old per-line height *estimate* used to leave.
+1. Markdown → HTML with the `markdown` library, wrapped in `templates/cv_a4.html` + `templates/cv_a4.css` (Inter, one linear column, A4 pages with 16 mm × 18 mm margins). Role lines become a flex row with right-aligned dates; the DOM order stays linear, so parsers read title, company, dates in sequence.
+2. Headless Microsoft Edge prints real A4 pages. CSS break rules keep a role title with its first bullets and a heading with its section.
+3. `--public` writes `<name>_public.pdf` with every `<span class="private">` removed (the phone). One Markdown source, two PDFs.
 
-This replaced a heuristic that guessed page height by counting/weighting Markdown lines and consistently overestimated. The new approach measures the real rendered output instead of guessing.
+Edge is found at the standard install paths or through `EDGE_PATH`. The workspace comes from `CV_WORKSPACE`, then `cv-builder.config.json`, then the repo itself.
 
-**Compile command (always targeted, never a blanket rebuild):**
+```bash
+python compile_all_pdfs.py "<Folder>"            # this folder, all .md files
+python compile_all_pdfs.py "<Folder>" --public   # phone-less variants next to the normal PDFs
+python compile_all_pdfs.py                       # every folder, only stale PDFs
 ```
-python compile_all_pdfs.py "<FolderName>"
+
+Never run a blanket rebuild to fix one application; target the folder.
+
+## Verification (run every time, before presenting output)
+
+```bash
+# CV
+python verify_pdf.py "<pdf>" --max-pages 2 --contains "<full name>" --contains "<email>" \
+  --order "Professional Summary" --order "Professional Experience" \
+  --order "Core Competencies" --order "Education"
+
+# Cover letter
+python verify_pdf.py "<pdf>" --pages 1 --contains "<full name>" --contains "<email>"
+
+# Project portfolio
+python verify_pdf.py "<pdf>" --max-pages 3 --contains "<full name>"
+
+# Public variant (phone must be absent)
+python verify_pdf.py "<pdf>_public.pdf" --max-pages 2 --forbids "<phone digits>"
 ```
-Add `--force` to recompile even if the PDF is already newer than the source `.md` (the default skips unchanged files).
 
-## Verification checklist (run every time, before presenting output)
+The verifier also fails on replacement characters or `(cid:*)` markers in the text layer (fonts that did not map to text).
 
-- [ ] `python compile_all_pdfs.py "<FolderName>"` ran with no `Error compiling` or `Warning: could not crop` lines.
-- [ ] `python verify_pdf.py "<path>.pdf" --pages 1 --contains "<full name>" --contains "<email>" --contains "<phone>"` passes (values from your candidate profile). This checks: exactly 1 page, a clean extractable text layer (no `�` or `(cid:*)` garbling), and that contact details are present as literal text, not just an icon/image.
-- [ ] Read the PDF (the Read tool renders it inline) and visually confirm:
-  - No excess blank space at the bottom of the page.
-  - No content is cut off (the crop's `max_ratio` safety guard raises rather than silently over-cropping, but a wrong bottom margin could still look tight — check the last line isn't touching the page edge).
-  - The header renders as a proper flexbox row (name + contact line), not broken across lines.
-  - Fonts and spacing are consistent throughout.
-- [ ] If anything fails: edit the Markdown, recompile, re-verify. Don't hand-edit the generated PDF or HTML directly — they're regenerated from Markdown every time.
+Visual checklist (read the PDF, the Read tool renders it):
+- [ ] The header is one row: name and contact line, photo on the right if present.
+- [ ] No role title sits alone at the bottom of a page.
+- [ ] Page 2 of a CV is at least a third full; if it holds only Languages and a line of Education, trim page 1 instead.
+- [ ] Dates are right-aligned on role lines; skills rows are one line each where possible.
+- [ ] Nothing is cut off; no image placeholder for a missing photo (the compiler warns and omits it).
 
-If a document is a genuine edge case (very long Project Portfolio approaching the oversized bound), `crop_pdf_to_content()` will raise instead of cropping — that error means either trim the content or, if it's a real one-off, raise `OVERSIZED_PAGE_HEIGHT_MM` in `compile_all_pdfs.py` rather than let a bad crop through silently.
+If anything fails: edit the Markdown, recompile, re-verify. Never edit the PDF or the intermediate HTML.
 
-## ATS Scoring Engine
+## ATS scoring (Phase 5, before compiling)
 
-Calculate an explicit ATS Score (0–100) once the Markdown is finalized (Phase 5, before compiling):
+Score the final Markdown 0–100:
 
-- **Formatting (30 pts):** Single column, standard fonts, clean structure.
-- **Structure (20 pts):** Standard headers in the order defined in `01-structure-and-style.md` section A; Skills placed after Experience.
-- **Content Quality (30 pts):** Bullets follow the Action+What+How/Why+Result formula with real metrics; truthfulness verified against your candidate profile. **-100 points for any hallucinated skill or claim, or for failing to ask before assuming one** — this is an automatic fail, go back to Phase 1 and ask the user rather than adjust the score downward and continue.
-- **Keyword Optimization (20 pts):** Real JD keywords the profile genuinely supports are present; gaps are acknowledged, never stuffed.
+- **Formatting (30):** single linear column, standard headings, no tables or text in images, header per `01` section G.
+- **Structure (20):** section order from `01` section A; skills after experience; length within budget.
+- **Content quality (30):** bullets follow the formula; proof points in the summary and bullets 1–3; every number traceable to `verified metrics`. **−100 for any claim not in the profile, or for assuming one without asking.** That is an automatic fail: return to Phase 1 and ask.
+- **Keyword match (20):** JD terms the profile genuinely supports are present in the wording the JD uses; gaps are acknowledged, never stuffed.
 
-Report the score and a short breakdown alongside the final output.
+Report the score with a short breakdown next to the final output. It is a heuristic for catching problems, not a measurement from any real tracking system.

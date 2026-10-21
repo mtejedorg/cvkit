@@ -1,67 +1,86 @@
 ---
 name: cv-builder
-description: Tailor a CV, cover letter, and project portfolio to a specific job posting, using candidate_profile_<your-name>.md as the factual source of truth. Triggers on requests to apply, tailor a CV/resume, write a cover letter, build a project portfolio, or check an ATS score for a job description.
+description: Tailor a CV, cover letter, and project portfolio to a specific job posting, using the candidate profile as the only source of truth. Triggers on requests to apply, tailor a CV/resume, write a cover letter, build a project portfolio, regenerate a generic CV, or check an ATS score for a job description.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Task, AskUserQuestion
 ---
 
 # CV Builder
 
-This skill runs the full pipeline for turning a job description (JD) into a tailored CV, cover letter, and project portfolio: draft → humanize → review → score → compile → verify.
-**Source of truth for facts:** `_private/candidate_profile_<your-name>.md`. This is the single authoritative source of all your experience, skills, and positioning — the skill reads from it, never invents. Never add a skill, tool, title, or achievement that isn't documented there; see `01-structure-and-style.md`'s "ASK BEFORE LYING" rule. **First time setting up?** [See CLAUDE.md for detailed instructions on populating your candidate profile](../../CLAUDE.md#2-create-your-candidate-profile-in-_private).
+Turns a job description (JD) into a tailored CV, cover letter and project portfolio, then reviews, scores, compiles and verifies them. Three principles decide every choice:
 
-**Output:** a folder named after the company/role inside `_generated/` (e.g. `_generated/Acme_Corp/`, `_generated/Example_Platform_Lead/`), containing `CV_<Name>.md`/`.pdf`, `Cover_Letter_<Name>.md`/`.pdf`, and `Project_Portfolio_<Name>.md`/`.pdf`. These folders hold real, already-submitted application materials — never delete or silently overwrite an existing one; ask before touching a folder that already has content, unless the user is explicitly asking to revise that specific application.
+1. **Never lie.** Every claim comes from the candidate profile. A posting item the profile does not back is a question for the user, never an assumption. See `01-structure-and-style.md` section C and `05-profile-schema.md`.
+2. **Lead with the strongest proof.** Each run picks the three proof points that matter most for this posting and puts them where a reader looks first: the summary, the first bullets, the cover letter's opening.
+3. **Adapt to the offer.** The run names a positioning profile, orders the content by what the posting values, and stays within a length budget so the result reads well on paper.
+
+**Source of truth:** `<workspace>/_private/candidate_profile_<name>.md`, shaped per [05-profile-schema.md](05-profile-schema.md). **First time?** Copy `templates/candidate_profile_template.md` there and follow [CLAUDE.md](../../../CLAUDE.md).
+
+**Output:** `<workspace>/_generated/<Company_Role>/` with `CV_<First>_<Last>.md` + `.pdf`, `Cover_Letter_<First>_<Last>.md` + `.pdf`, `Project_Portfolio_<First>_<Last>.md` + `.pdf`. These folders are sent applications: never delete or overwrite one without being asked to revise that application.
 
 ## Reference files
 
 | File | Covers |
 |---|---|
-| [01-structure-and-style.md](01-structure-and-style.md) | Section order, bullet formula, ASK BEFORE LYING, flagship-skill rule, regional photo rules, HTML header requirement, writing-style/anti-cliché rules, Project Portfolio rules |
-| [02-humanization-checklist.md](02-humanization-checklist.md) | The humanization pass: AI-tell checklist and the hard no-fact-drift constraint |
-| [03-pdf-compilation-and-verification.md](03-pdf-compilation-and-verification.md) | How to compile, crop, and verify the PDFs; the ATS Scoring Engine rubric |
-| [04-drafter-reviewer-workflow.md](04-drafter-reviewer-workflow.md) | How to spawn and use the fresh-context reviewer subagent |
+| [01-structure-and-style.md](01-structure-and-style.md) | Section order, header convention, length budget, proof-point placement, bullet formula, photo rules, writing style, portfolio rules |
+| [02-humanization-checklist.md](02-humanization-checklist.md) | The humanization pass: AI-tell checklist and the no-fact-drift constraint |
+| [03-pdf-compilation-and-verification.md](03-pdf-compilation-and-verification.md) | A4 compilation, the public variant, verification commands, the ATS rubric |
+| [04-drafter-reviewer-workflow.md](04-drafter-reviewer-workflow.md) | The fresh-context reviewer subagent |
+| [05-profile-schema.md](05-profile-schema.md) | Profile sections, skill depth levels, what counts as a gap |
 
 ## Workflow
 
-### Phase 1 — JD Analysis & Mandatory Clarification
-1. Read the JD (URL fetch or pasted text) and your `_private/candidate_profile_<your-name>.md`.
-2. Cross-reference: which required/preferred skills does the profile support, which are missing or ambiguous? Skills listed under the profile's `Confirmed gaps` section are settled: never claim them, and don't ask about them again unless the user says things changed.
-3. **HALT if the JD requires something not in the profile.** Use `AskUserQuestion` to ask before drafting — never assume or invent. This is non-negotiable; see `01-structure-and-style.md` section C.
-4. Once clarified (or confirmed no gaps), proceed. Keep a running list of every answer the user gave, in their own words, for Phase 7.
+### Phase 0 — Workspace
+1. Resolve the workspace: `CV_WORKSPACE` env var, else `cv-builder.config.json` next to this repo, else the repo itself. `_private/` and `_generated/` live there.
+2. Read the profile in full and `<workspace>/_private/applications_log.md` if it exists (previous postings and the answers they produced).
+
+### Phase 1 — JD analysis and mandatory clarification
+1. Read the JD (URL or pasted text). Check it against `## Deal-breakers` first and say so if it conflicts.
+2. Cross-reference every requirement, preference, tool, methodology and soft skill in the JD with `## Skills` and `## Experience`. An item is a **gap** when it has no profile row, or only one at `academic`, `evaluated` or `supervised` depth. Items under `## Not claimable` are settled: never claim, never re-ask.
+3. **Ask about every gap in one `AskUserQuestion`**, hard or soft (agile/Scrum, a tool, a process, a soft skill). Never decide alone that something is "not claimable" or "not worth mentioning". Include relevant `## Open questions` entries.
+4. Choose the **positioning profile** (`## Positioning profiles`) and the **three leading proof points** (`## Proof points`) for this posting. State both to the user in one line before drafting; adjust if they object.
+5. Decide photo (regional rule, unless the profile's `photo:` overrides) and output language (English unless the posting requires another, or the profile says otherwise).
+6. Keep a running list of every answer, in the user's words, for Phase 7.
 
 ### Phase 2 — Drafting
-1. Draft CV, Cover Letter, and Project Portfolio in Markdown per `01-structure-and-style.md`.
-2. Self-critique against: truthfulness, flagship-skill prominence, bullet ordering, section hierarchy, blank-line-before-list formatting.
-3. Revise. Stop here — do not compile to PDF yet (compilation happens once, in Phase 6, after humanization and review, not before).
+1. Draft the CV, cover letter and project portfolio in Markdown per `01-structure-and-style.md`: header convention, section order, **length budget**, proof points in the summary and bullets 1–3, metrics per `## Preferences`.
+2. Self-check: every claim traceable to the profile; no number outside `verified metrics`; a blank line before every list; no "Tailored for…" meta text.
+3. Do not compile yet.
 
-### Phase 3 — Humanization Pass
-Re-read the drafted Markdown against `02-humanization-checklist.md`. Rewrite for natural variation. **Hard constraint: no fact, claim, number, or meaning changes in this phase — style only.**
+### Phase 3 — Humanization pass
+Re-read against `02-humanization-checklist.md`. Style only: no fact, number, date, title or meaning changes.
 
-### Phase 4 — Reviewer Subagent Critique
-Spawn a fresh-context subagent per `04-drafter-reviewer-workflow.md`. Apply its feedback (missed keywords, weak framing, generic language, residual AI-sounding text) back into the Markdown. Re-run the humanization check on anything the reviewer rewrote.
+### Phase 4 — Reviewer subagent
+Spawn the fresh-context reviewer per `04-drafter-reviewer-workflow.md`. Apply what improves targeting without changing facts; a suggested new claim is a Phase 1 question. Re-run the humanization check on anything rewritten.
 
-### Phase 5 — ATS Scoring
-Score the final Markdown per the 0–100 rubric in `03-pdf-compilation-and-verification.md`. A hallucinated skill/claim is an automatic -100 — if you find one at this stage, go back to Phase 1 and ask the user instead of silently removing it.
+### Phase 5 — ATS scoring
+Score per the rubric in `03-pdf-compilation-and-verification.md`. An invented claim is −100: go back to Phase 1 and ask instead of deleting it quietly.
 
-### Phase 6 — Compile & Verify PDFs
-1. `python compile_all_pdfs.py "<FolderName>"` to compile just this folder's Markdown files (output goes to `_generated/<FolderName>/`).
-2. `python verify_pdf.py "<path>.pdf" --contains "<full name>" --contains "<email>"` for each generated PDF (pull name/email/phone from your candidate profile).
-3. Read the PDF (the Read tool renders it) and visually inspect: content complete, no trailing whitespace, header renders as a flexbox row not broken text, fonts consistent.
-4. Iterate (edit Markdown, recompile) until all of `03-pdf-compilation-and-verification.md`'s checklist passes.
+### Phase 6 — Compile and verify
+1. `python compile_all_pdfs.py "<Folder>"` (A4 pages). Add `--public` when a phone-less variant is needed.
+2. `python verify_pdf.py` on each PDF with the page caps and the `--order` headings from `03-…`; for a public PDF add `--forbids "<phone>"`.
+3. Read the PDF and check it by eye against the visual checklist. Iterate on the Markdown, never on the PDF.
 
-### Phase 7 — State Update (the profile learns)
-Every answer the user gave during the run (Phase 1 clarifications, plus anything asked again in Phase 4 or 5) must end up in `_private/candidate_profile_<your-name>.md`, so the next application starts from better facts and the same question isn't asked twice. This is a rule, not an extra: don't finish a run that asked questions without doing it.
+### Phase 7 — State update (the profile learns)
+Every answer the user gave in this run goes into the profile, in their words:
+1. A confirmed skill goes to `## Skills` at the depth they described, with the scope in the note; a confirmed fact goes to the Experience/Project entry it belongs to; a confirmed number goes under that entry's `verified metrics` with today's date.
+2. A "no" goes to `## Not claimable` with the date and the posting.
+3. Nothing is inferred or upgraded. Show the exact lines added or changed.
+4. Append one entry to `<workspace>/_private/applications_log.md`: date, company, role, positioning profile used, gaps asked and the answers, files produced.
+5. Runs this even after partial commands (an ATS-only check that asked a question).
 
-1. **Only what the user stated.** Write their own words and scope. Never infer, round up, or upgrade an answer ("used Kubernetes once in a tutorial" is recorded as exactly that, not as "Kubernetes").
-2. **Put it where it belongs.** A confirmed skill or detail goes in the matching profile section (Technical Skills, or the role it came from). A confirmed *no* goes under a `Confirmed gaps` section with the date and the posting that prompted it, so it is never claimed later. If the user says it changed, update the entry.
-3. **Show what changed.** List the exact lines added or edited so the user can correct or revert anything.
-4. **Run it on partial commands too.** An ATS-only or analysis-only run that asked questions still writes its answers back.
+### Phase 8 — Interview prep (optional)
+On request: STAR-method prep from `## STAR stories` (say which are still `draft`), the JD and the final documents.
 
-### Phase 8 — Interview Prep (optional)
-If the user wants it, offer a STAR-method interview prep pass based on the JD and the final CV/cover letter.
+## Privacy rules
+
+- The phone number is written only inside `<span class="private">` in document headers. The `--public` build removes it; use that build for anything that goes on a website.
+- Never paste profile content into a file outside `<workspace>/_private/` or `<workspace>/_generated/`.
+- `python privacy_check.py` must pass before any commit in the skill repo.
 
 ## Quick commands
 
-- "Tailor my CV for `<JD or URL>`" → full Phase 1–7 workflow.
-- "What's the ATS score for `<company>`'s posting against my current CV?" → Phase 1 + 5 only, no drafting (plus Phase 7 if you answered any question).
-- "Recompile `<FolderName>`" → Phase 6 only (useful after a manual Markdown edit).
-- "Humanize `<file>`" → Phase 3 only, against an already-drafted file.
+- "Tailor my CV for `<JD or URL>`" → Phases 0–7.
+- "Regenerate my generic CV" → Phases 0, 2–6 with the `### General` positioning profile into `_generated/Generic/`, compiled both normally and with `--public`.
+- "What's the ATS score for `<company>`'s posting?" → Phases 0, 1 and 5 (plus 7 if a question was asked).
+- "Recompile `<Folder>`" → Phase 6.
+- "Humanize `<file>`" → Phase 3 on an existing file.
+- "Interview prep for `<Folder>`" → Phase 8.

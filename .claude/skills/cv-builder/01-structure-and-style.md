@@ -1,64 +1,83 @@
 # Structure & Style Rules
 
-The default structure and style rules. Adapt them to your background and target markets (see CLAUDE.md, "Adapt the skill for your background").
+Defaults for every generated document. Adapt them to your market in your fork; the profile's `## Preferences` section overrides individual rules.
 
-## A. Section Hierarchy Order (Default)
-The CV sections MUST be ordered in the following sequence:
-1. **Header** (HTML Flexbox `<div class="cv-header">`)
-2. **Professional Summary**
-3. **Professional Experience** (Commercial Work Experience)
-4. **Additional Experience & Projects** (Personal & Academic Projects)
-5. **Core Competencies & Technical Skills** (ALWAYS place Skills AFTER Experience)
-6. **Education**
-7. **Languages**
+## A. Section order (CV)
 
-## B. Bullet-Point Formula & Job-Specific Prioritization
-- All experience bullet points must follow: `[Action Verb] + [What you did] + [How/Why you did it] + [Quantifiable Result]`.
-- **Bullet Order Prioritization:** For a given job description, order the bullet points under main roles (e.g., your current employer) so that the **primary required skills of the target job** appear in bullets 1–3. Place secondary accomplishments (R&D, AI, prototyping) further down (bullets 4–6) unless the job is specifically an R&D/AI role.
+1. Header (HTML block, see G)
+2. Professional Summary
+3. Professional Experience
+4. Additional Experience & Projects
+5. Core Competencies & Technical Skills (always after Experience)
+6. Education
+7. Languages
 
-## C. "ASK BEFORE LYING" (Strict Truthfulness & No Invention Rule)
-- **NEVER invent, hallucinate, or claim skills, frameworks, APIs, certifications, or job titles not explicitly present in `candidate_profile_<your-name>.md`.** (e.g., never claim Kubernetes experience, a PMP certification, or a "Staff Engineer" title if the profile doesn't list it).
-- **If the JD requires a skill not in the profile, YOU MUST ASK THE USER about it before assuming they have it. NEVER LIE.**
-- **Save what you learn.** The user's answer, including a "no", is written back to the profile in Phase 7 (a "no" under `Confirmed gaps`), so it is never contradicted or re-asked. See `SKILL.md`.
-- Ground all tailoring strictly in the candidate's real experience as documented in the profile: its skills, tools, domains, and projects. Nothing outside it.
+Periods without an employer get an Experience entry of their own (e.g. "Independent Game Developer | Self-employed"), with real work listed. Never leave an unexplained gap.
 
-## D. Flagship Core Skill Prominence Rule
-- The candidate's primary flagship skill (the one named in the profile's Professional Headline) MUST ALWAYS be explicitly featured in the opening sentence of the Professional Summary and Cover Letter introduction, even when the target job centers on a different stack or platform.
+## B. Length budget
 
-## E. Regional Photo Rules
-- **Omit Photo:** US, UK, Canada, Australia (anti-discrimination compliance).
-- **Include Photo:** DACH region (Germany, Austria, Switzerland), Spain, France, Middle East, Asia (unless specifically instructed otherwise).
+| Document | Limit | Inside it |
+|---|---|---|
+| CV | 2 A4 pages (`--max-pages 2`) | Summary 50–70 words. Main role 5–7 bullets, each ≤ 30 words. Older roles 1–3 bullets. Projects 2–3 bullets each. Skills ≤ 7 rows. Education ≤ 2 lines per degree. |
+| Cover letter | 1 page, ≤ 320 words | Subject line, greeting, 3 short paragraphs, sign-off with contact line. |
+| Project portfolio | 3 A4 pages | 2–4 projects per role, 2–3 bullets each, years on every project. |
 
-## F. Design & Template Selection
-- **Tech/Engineering:** Minimalist, clean, single-column design. High ATS parsing priority.
-- **Creative/Design:** Creative Hybrid. Can include subtle visual flair, but text must flow in a single column for parsers.
-- **Corporate/Finance:** Professional Traditional. Highly conservative layout.
+When content exceeds the budget, cut the weakest bullet, not the margins.
 
-## G. Structural Layout Rule (The Header & PDF Compilation)
-- To avoid CSS rendering glitches when building PDFs, the CV header MUST NOT be written in pure Markdown. Instead, it must be constructed using a raw HTML Flexbox wrapper (`<div class="cv-header">`).
-- **Targeted Incremental Compilation:** To avoid long build times, NEVER compile all CVs for a single update. Always run targeted compilation for the specific folder being edited: `python compile_all_pdfs.py "<FolderName>"` (e.g., `python compile_all_pdfs.py "Acme_Corp"`).
+## C. "ASK BEFORE LYING"
+
+- Never invent or upgrade a skill, tool, title, certification, date or number. The profile's `## Skills` depth levels (`05-profile-schema.md`) decide the wording.
+- A JD item not backed at `production` or `working` depth is a question for the user, however minor. The user's answer, including "no", is written back in Phase 7.
+- Numbers come only from `verified metrics` lines. Old generated documents are not a source.
+
+## D. Proof points and positioning
+
+- Phase 1 names a `### <Family>` positioning profile and three proof points. The summary's first sentence uses the profile's `flagship skill` and its first proof point. Bullets 1–3 of the main role carry the three proof points (or the facts behind them). The cover letter's first paragraph states the single strongest one.
+- Order remaining bullets by what the JD asks for first. Secondary work (R&D, side interests) goes last unless the posting is about it.
+- Metrics follow `## Preferences` → `metrics:`. Default: at most two percentages and two counts per CV; everything else in plain words. A number used in the cover letter is not repeated in the CV unless it is the leading proof point.
+
+## E. Regional photo rules
+
+- Omit: US, UK, Canada, Australia, Finland (and any posting that says so).
+- Include: DACH, Spain, France, Middle East, most of Asia.
+- The profile's `photo:` line overrides either default.
+
+## F. Bullet formula
+
+`[Action verb] + [what you did] + [how or why] + [result]`. The result is a number only when `verified metrics` has one and the budget allows it; otherwise a concrete outcome in words ("so layouts changed without a new build"). Vary opening verbs across consecutive bullets.
+
+## G. Header convention (required for the PDF template)
+
+Write the header as raw HTML, never as Markdown, so the compiler can lay it out and strip private data for public builds:
 
 ```html
 <div class="cv-header">
   <div class="cv-header-text">
-    <h1>[Name]</h1>
-    <p>[Location] | [Email] | [Phone] | [LinkedIn] | [GitHub]</p>
+    <h1>First Last</h1>
+    <p class="cv-contact">City, Country · email@example.com · <span class="private">+00 000 000 000 · </span>linkedin.com/in/handle · github.com/handle</p>
   </div>
-  <!-- If a photo is required based on Regional Rules, include it here: -->
-  <img src="file:///path/to/photo.jpg" class="profile-photo" />
+  <img src="file:///absolute/path/to/photo.jpg" class="profile-photo" />  <!-- only when E says include -->
 </div>
 ```
 
-## H. Writing Style & Anti-Redundancy Rules
-- **Tone:** Professional, active, concise, highly humanized.
-- **Anti-Clichés:** Absolutely ban phrases like "proven track record", "extensive background", "delve", "testament", "orchestrated", "aligns perfectly". (See `02-humanization-checklist.md` for the extended list and the dedicated humanization pass this now runs through.)
-- **Anti-Redundancy:** Never restate the same tool or category twice in one phrase (e.g., "Python and Python-based scripting", "React and front-end frameworks"). Name the specific tool once and lead with it.
-- **Verbs:** Use active participles (e.g., "Bringing," "Specialized in") in summaries to avoid awkward 1st/3rd person conjugation.
-- **Markdown Formatting Rule (CRITICAL for PDF Generator):** You MUST place a completely blank line immediately before the start of any bulleted list. If you do not include a blank line before the first `*` or `-`, the PDF compilation script will fail to parse the list and will render it as a single broken paragraph.
+The phone and its trailing separator sit inside `span.private`. The cover letter uses the same header without the photo and repeats email and phone in the sign-off, phone again inside `span.private`.
 
-## I. Project Portfolio Generation Rules
-When drafting the application materials, always generate a customized Project Portfolio alongside the CV and Cover Letter.
-- **Structure:** Group projects under large headers by **Company and Role** (e.g., `# Senior Backend Engineer (Example Corp)`).
-- **Ordering:** Order projects in strict **Reverse-Chronological** order within and across company sections. Include development years for each project.
-- **Tone:** Humanized, first-person active language (e.g., "I built", "I designed", "I hooked up") instead of robotic/ATS language. Keep the technologies list concise without long unstructured strings.
-- **NEVER Include "Tailored for..." Meta-Labels:** NEVER write phrases like "Tailored for [Company]", "Customized for [Role]", or any similar meta-commentary in the CV, Cover Letter, Project Portfolio, or any other generated document. All documents must appear natural, direct, and self-contained.
+Role lines must follow this exact shape so the template can right-align the dates:
+
+```markdown
+**Lead Engineer | Example Corp** *(Apr 2019 – Jul 2026, Madrid, Spain)*
+```
+
+## H. Writing style
+
+- Plain, specific, active. Participles in summaries ("Bringing…", "Specialized in…") avoid first/third-person clashes.
+- Banned phrases and AI tells: see `02-humanization-checklist.md`. They apply to every document, including the generic CV and any website copy derived from the profile.
+- Name a tool once per phrase ("C# and Unity", not "Unity and game engines").
+- No "Tailored for…", "Customized for…" or any meta text in the documents.
+- **A blank line before every list.** The Markdown converter needs it; without it the list renders as one paragraph.
+
+## I. Project portfolio
+
+- Group projects under `## <Title> (<Company>)` headers by role, reverse-chronological across and within sections, with years on every project.
+- First-person, active ("I built…"), 2–3 bullets per project, a short technology line per project, no long tool dumps.
+- Only projects with a `status` in the profile; academic work is labelled academic.

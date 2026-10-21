@@ -1,29 +1,31 @@
 # Drafter/Reviewer Workflow
 
-After drafting (Phase 2) and the humanization pass (Phase 3), spawn a second opinion before finalizing. Inspired by the reviewer-agent pattern in the open-source `ai-job-search` project by Mads Lorentzen: "a second Claude agent, spawned with a fresh context, researches the company and critiques the drafts."
+After drafting (Phase 2) and the humanization pass (Phase 3), get a second opinion from a reviewer with no memory of the drafting. The pattern comes from the open-source `ai-job-search` project by Mads Lorentzen: a second agent, spawned with a fresh context, critiques the drafts.
 
 ## How to spawn it
 
-Use the `Task` tool with a general-purpose subagent. No dedicated `.claude/agents/*.md` file is needed at this scope — one cohesive workflow doesn't need a named persistent agent definition, unlike `ai-job-search`'s multi-command surface.
+Use the `Task` tool with a general-purpose subagent (default model; no model override). Hand it, inline in the prompt:
 
-**Hand it, inline in the prompt (a fresh subagent has no memory of this conversation):**
-- The job description (verbatim).
-- The drafted CV, Cover Letter, and Project Portfolio Markdown (verbatim, post-humanization).
-- A short excerpt of your candidate profile — just the sections relevant to this JD (skills/experience it drew on), not the whole file.
-- The ATS score from Phase 5, if already computed, or ask it to hold off until after its critique.
+- The job description, verbatim.
+- The drafted CV, cover letter and project portfolio Markdown, post-humanization.
+- The profile sections this posting drew on: the chosen `### <Family>` positioning profile, the three proof points, the relevant Experience/Project entries and Skills rows. Not the whole file.
+- The length budget from `01-structure-and-style.md` section B and the banned-phrase list from `02-humanization-checklist.md`.
+- The ATS score from Phase 5 if already computed, or ask it to hold off.
 
-**Ask it to return a structured critique covering:**
-- Missed keywords from the JD that the profile genuinely supports but the draft didn't surface.
-- Weak or generic framing — claims that are true but stated vaguely when a more specific, JD-relevant framing exists in the profile.
-- Any language that still reads as templated or AI-generated (a second pass at what `02-humanization-checklist.md` is meant to catch — catches what the first pass missed).
-- Any factual inconsistency between the CV, Cover Letter, and Project Portfolio (e.g., different phrasing of the same metric that could look like two different numbers).
+Ask for a structured critique with these headings:
 
-**Explicitly tell the reviewer subagent:** it is reviewing, not researching the company or fabricating anything about the candidate — it should ground every suggestion in the profile excerpt and JD text it was given, not invent additional context.
+1. **Missed keywords.** JD terms the profile supports that the draft did not surface, with the profile line that supports each.
+2. **Proof-point placement.** Are the three proof points in the summary and bullets 1–3? Is anything stronger buried lower?
+3. **Weak or generic framing.** True claims stated vaguely when the profile holds a more specific version.
+4. **Length and density.** Anything over budget; bullets over 30 words; more numbers than the profile's `metrics:` preference allows.
+5. **Residual AI tells.** Anything the humanization checklist would flag.
+6. **Consistency.** The same fact phrased two ways across CV, letter and portfolio.
+
+Tell the reviewer explicitly: it reviews, it does not research the company and it does not propose anything about the candidate that is not in the excerpt it was given.
 
 ## Applying the critique
 
-1. Read the reviewer's critique.
-2. Apply changes that improve targeting/clarity without changing facts.
-3. If the critique suggests adding a claim not present in your candidate profile, treat it like any other gap — ask the user (Phase 1's "ask before lying" rule applies here too, not just to the JD's own requirements), and add their answer to the Phase 7 write-back list.
-4. Re-run the humanization checklist on anything the reviewer's suggestions changed, since a rewrite can reintroduce a cliché or awkward phrasing.
-5. Proceed to Phase 5 (ATS Scoring) on the final text.
+1. Apply changes that improve targeting, clarity or length without changing facts.
+2. A suggestion that adds a claim not in the profile is a gap: ask the user (Phase 1 rule), and add the answer to the Phase 7 list.
+3. Re-run the humanization checklist on anything rewritten.
+4. Proceed to Phase 5 on the final text.
