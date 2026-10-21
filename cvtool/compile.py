@@ -31,9 +31,10 @@ EDGE_CANDIDATES = [
 ]
 
 _PRIVATE_SPAN = re.compile(r'<span class="private">.*?</span>', re.DOTALL)
+# A role line is one paragraph: "**Title | Company** *(dates, city)*". The title must not
+# cross a paragraph boundary, otherwise a "**Label:** items" row before it gets swallowed.
 _ROLE_LINE = re.compile(
-    r"<p><strong>(?P<title>.+?)</strong>(?P<rest>[^<]*?)<em>\((?P<dates>.+?)\)</em>\s*</p>",
-    re.DOTALL,
+    r"<p><strong>(?P<title>[^\n]+?)</strong>(?P<rest>[^<\n]*?)<em>\((?P<dates>[^)\n]+?)\)</em>\s*</p>"
 )
 _LOCAL_IMG = re.compile(r'<img[^>]*src="file:///(?P<path>[^"]+)"[^>]*>')
 

@@ -48,6 +48,18 @@ def test_build_html_wraps_role_lines_in_cv_role_rows():
     assert "2021 – Present, Austin, TX" in html
 
 
+def test_label_rows_before_a_role_line_are_not_swallowed():
+    md = (
+        "## Skills\n\n**Languages:** Go, Python\n\n**Tools:** Git\n\n## Education\n\n"
+        "**B.S. in Computer Science | Example State University** *(2011 – 2015, Austin, TX)*\n\nCapstone: a key-value store.\n"
+    )
+    html = build_html(md)
+    assert html.count('class="cv-role"') == 1
+    assert "<p><strong>Languages:</strong> Go, Python</p>" in html
+    assert "<p><strong>Tools:</strong> Git</p>" in html
+    assert '<span class="cv-role-dates">2011 – 2015, Austin, TX</span>' in html
+
+
 @needs_edge
 def test_long_fixture_paginates_without_splitting_a_role_heading(tmp_path: Path):
     pdf = compile_markdown(LONG_CV, tmp_path / "long.pdf")
