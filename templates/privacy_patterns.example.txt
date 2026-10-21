@@ -1,0 +1,11 @@
+# privacy_patterns.txt: one literal per line, case-insensitive.
+# A single word matches as a whole word; anything else matches as a substring.
+# Keep this file in <workspace>/_private/ (never tracked). Copy this example there.
+
+# Contact details that must never reach a public file
+alex.rivera@example.com
+555) 010-0142
+555-010-0142
+
+# File names that only exist in your private workspace
+candidate_profile_alex-rivera

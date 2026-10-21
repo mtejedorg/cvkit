@@ -9,3 +9,6 @@ _generated/
 # Python
 __pycache__/
 *.pyc
+
+# Local workspace pointer (points at your private career folder)
+cv-builder.config.json

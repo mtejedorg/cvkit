@@ -1,0 +1,4 @@
+#!/bin/sh
+# Blocks a commit that contains personal data. Enable once per clone:
+#   git config core.hooksPath .githooks
+python privacy_check.py || exit 1
