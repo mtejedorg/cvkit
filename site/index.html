@@ -44,7 +44,7 @@
                     <a class="btn btn-secondary btn-lg" href="https://github.com/mtejedorg/cv-builder-public" target="_blank" rel="noopener">View the source ↗</a>
                 </div>
                 <div class="hero-stats">
-                    <div><span class="stat-number">8</span><span class="stat-label">Pipeline phases</span></div>
+                    <div><span class="stat-number">9</span><span class="stat-label">Pipeline phases</span></div>
                     <div><span class="stat-number">1</span><span class="stat-label">Source of truth</span></div>
                     <div><span class="stat-number">−100</span><span class="stat-label">Points for an invented claim</span></div>
                     <div><span class="stat-number">1 page</span><span class="stat-label">Verified PDF output</span></div>
@@ -56,7 +56,7 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">Design philosophy</span>
-                    <h2 class="section-title">Five rules the whole skill is built around</h2>
+                    <h2 class="section-title">Six rules the whole skill is built around</h2>
                     <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them.</p>
                 </div>
                 <div class="grid grid-5">
@@ -85,6 +85,11 @@
                         <h3>The profile learns</h3>
                         <p>Every answer you give to a clarification question is written back to your profile in your own words. A "no" is kept as a confirmed gap, so it is never claimed later and each application starts from better facts than the last.</p>
                     </article>
+                    <article class="glass-card card">
+                        <div class="card-icon">06</div>
+                        <h3>Lead with proof</h3>
+                        <p>The profile ranks your strongest verifiable claims and names a positioning profile per kind of role. Each run picks three proof points for the posting and puts them in the summary, the first bullets and the letter's opening, within a two-page budget.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -98,10 +103,17 @@
                 </div>
                 <ol class="steps">
                     <li class="step">
+                        <span class="step-num">0</span>
+                        <div class="glass-card step-card">
+                            <h3>Workspace</h3>
+                            <p>Finds your private workspace (profile, applications, log) through an environment variable or a gitignored config file, so the public skill repo never holds a personal file.</p>
+                        </div>
+                    </li>
+                    <li class="step">
                         <span class="step-num">1</span>
                         <div class="glass-card step-card">
                             <h3>JD analysis &amp; mandatory clarification <span class="gate gate-stop">Halts &amp; asks you</span></h3>
-                            <p>Reads the posting and your candidate profile, then cross-references them. Anything the posting requires that the profile doesn't support is a question for you, asked before a single word is drafted.</p>
+                            <p>Reads the posting and your candidate profile, then cross-references them. Every item the profile doesn't back, hard requirement or soft skill, is a question for you, asked before a single word is drafted. Then it names the positioning profile and the three proof points it will lead with.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -136,7 +148,7 @@
                         <span class="step-num">6</span>
                         <div class="glass-card step-card">
                             <h3>Compile &amp; verify PDFs <span class="gate gate-check">Automated + visual</span></h3>
-                            <p>Renders the Markdown to PDF, crops it to its content, runs the verifier, and reads the result to confirm nothing is cut off or misaligned.</p>
+                            <p>Renders the Markdown onto real A4 pages (two for a CV, one for a letter), builds a phone-less public variant on request, runs the verifier, and reads the result to confirm nothing is cut off or misaligned.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -281,13 +293,13 @@
                 <div class="verify">
                     <ol class="flow">
                         <li><strong>Markdown → HTML</strong> with a fixed template (single column, standard font, a flexbox header).</li>
-                        <li><strong>Headless Edge → PDF</strong> on a deliberately oversized page, so content can never spill onto a second page.</li>
-                        <li><strong>PyMuPDF crop</strong> measures the real bottom edge of the content and trims the page to it, removing trailing whitespace instead of guessing page height.</li>
-                        <li><strong>Verifier</strong> checks the page count, that the text layer has no garbled characters, and that name, email and phone exist as literal text.</li>
+                        <li><strong>Headless Edge → PDF</strong> on real A4 pages, with break rules that keep a role title with its first bullets. A <code>--public</code> build strips the phone number for anything that goes online.</li>
+                        <li><strong>Verifier</strong> enforces the page cap (two for a CV, one for a letter), checks the text layer for garbled characters, that the sections appear in order, and that the contact details are literal text (or, for a public build, that the phone is absent).</li>
+                        <li><strong>Privacy check</strong> scans every tracked file for the candidate's own patterns before a commit can land.</li>
                         <li><strong>Visual read</strong> confirms nothing is cut off and the header renders as a proper row.</li>
                     </ol>
                     <figure class="glass-card preview">
-                        <img src="assets/sample_cv.png" alt="One-page CV for the fictional candidate Alex Rivera, produced by the toolchain" width="910" height="1371" loading="lazy">
+                        <img src="assets/sample_cv.png" alt="One-page A4 CV for the fictional candidate Alex Rivera, produced by the toolchain" width="909" height="1287" loading="lazy">
                         <figcaption>Fictional candidate "Alex Rivera". <a href="assets/CV_Alex_Rivera_sample.pdf">Open the PDF ↗</a></figcaption>
                     </figure>
                 </div>

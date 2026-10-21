@@ -1,7 +1,7 @@
 <div class="cv-header">
   <div class="cv-header-text">
     <h1>Alex Rivera</h1>
-    <p>Austin, TX, USA | alex.rivera@example.com | +1 (555) 010-0142</p>
+    <p class="cv-contact">Austin, TX, USA · alex.rivera@example.com · <span class="private">+1 (555) 010-0142 · </span>linkedin.com/in/alexrivera · github.com/alexrivera</p>
   </div>
 </div>
 
@@ -11,14 +11,14 @@ Go and Python backend engineer with 8 years of experience building payment and l
 
 ## Professional Experience
 
-**Senior Backend Engineer** | Example Payments Inc. | 2021 – Present
+**Senior Backend Engineer | Example Payments Inc.** *(2021 – Present, Austin, TX)*
 
-- Rebuilt the transaction-ledger API in Go, cutting p95 latency from 310 ms to 180 ms (42%) while the service absorbed 3x peak traffic.
+- Rebuilt the transaction-ledger API in Go, cutting p95 latency from 310 ms to 180 ms while the service absorbed 3x peak traffic.
 - Split a Python monolith into 6 services on AWS (ECS, RDS PostgreSQL), reducing deploy time from 50 minutes to 9.
 - Added contract tests and canary releases, which brought rollbacks down from 11 per quarter to 2.
 - Mentored 3 engineers; two were promoted within 18 months.
 
-**Backend Engineer** | Sample Logistics Co. | 2017 – 2021
+**Backend Engineer | Sample Logistics Co.** *(2017 – 2021, Dallas, TX)*
 
 - Wrote route-planning services in Python that shortened average delivery estimates by 12%, using PostgreSQL window queries instead of an in-memory cache.
 - Containerized 9 batch jobs with Docker, so any engineer could reproduce a failed run locally in minutes.
@@ -26,14 +26,17 @@ Go and Python backend engineer with 8 years of experience building payment and l
 
 ## Core Competencies & Technical Skills
 
-- **Languages:** Go, Python, SQL
-- **Data & Cloud:** PostgreSQL, AWS (ECS, RDS, S3, SQS), Docker
-- **Practices:** Contract testing, canary releases, code review, on-call incident response
+**Languages:** Go, Python, SQL
+
+**Data & Cloud:** PostgreSQL, AWS (ECS, RDS, S3, SQS), Docker
+
+**Practices:** Contract testing, canary releases, code review, on-call incident response
 
 ## Education
 
-B.S. in Computer Science, Example State University, 2017
+**B.S. in Computer Science | Example State University** *(2011 – 2015, Austin, TX)*
 
 ## Languages
 
-English (native), Spanish (professional)
+- **English:** native
+- **Spanish:** professional
