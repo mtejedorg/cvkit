@@ -1,0 +1,11 @@
+# Private & generated folders (candidate profile, personal data, generated PDFs)
+_private/
+_generated/
+
+# Claude Code / harness runtime state
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.pyc

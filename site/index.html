@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cv-builder | A CV tailoring skill that is not allowed to lie</title>
+    <meta name="description" content="cv-builder is an open-source Claude Code skill that tailors a CV, cover letter and project portfolio to a job posting, using a fact file as the only source of truth, then reviews, scores and verifies its own output.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="cv-builder | A CV tailoring skill that is not allowed to lie">
+    <meta property="og:description" content="An open-source Claude Code skill: truthfulness gate, humanization pass, fresh-context reviewer, ATS rubric and verified PDFs.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090e'/%3E%3Cpath d='M24 20 12 32l12 12M40 20l12 12-12 12' fill='none' stroke='%2300f2fe' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#top" class="nav-logo"><span>&lt;</span>cv-builder<span> /&gt;</span></a>
+            <nav class="nav-links" aria-label="Sections">
+                <a href="#why">Why</a>
+                <a href="#pipeline">Pipeline</a>
+                <a href="#truth">Ask before lying</a>
+                <a href="#humanize">Humanizing</a>
+                <a href="#verify">Verified PDFs</a>
+                <a href="#run">Run it</a>
+                <a href="#limits">Limits</a>
+            </nav>
+            <a class="btn btn-secondary" href="https://github.com/mtejedorg/cv-builder-public" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <section class="hero">
+            <div class="container hero-inner">
+                <span class="badge">Open-source Claude Code skill</span>
+                <h1>A CV tailor that is <span class="text-gradient">not allowed to lie.</span></h1>
+                <p class="lead">cv-builder turns a job posting and a fact file about you into a tailored CV, cover letter and project portfolio. It stops and asks when the posting wants something your file doesn't back up, then reviews, scores and verifies its own work before handing it over.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="#pipeline">See the pipeline</a>
+                    <a class="btn btn-secondary btn-lg" href="https://github.com/mtejedorg/cv-builder-public" target="_blank" rel="noopener">View the source ↗</a>
+                </div>
+                <div class="hero-stats">
+                    <div><span class="stat-number">8</span><span class="stat-label">Pipeline phases</span></div>
+                    <div><span class="stat-number">1</span><span class="stat-label">Source of truth</span></div>
+                    <div><span class="stat-number">−100</span><span class="stat-label">Points for an invented claim</span></div>
+                    <div><span class="stat-number">1 page</span><span class="stat-label">Verified PDF output</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Design philosophy</span>
+                    <h2 class="section-title">Five rules the whole skill is built around</h2>
+                    <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them.</p>
+                </div>
+                <div class="grid grid-5">
+                    <article class="glass-card card">
+                        <div class="card-icon">01</div>
+                        <h3>No hallucination</h3>
+                        <p>Every skill, title and number must exist in the candidate profile. If the posting needs something the profile lacks, the skill halts and asks you instead of assuming.</p>
+                    </article>
+                    <article class="glass-card card">
+                        <div class="card-icon">02</div>
+                        <h3>Humanized, not detector-evasion</h3>
+                        <p>A direct rewrite pass removes template-sounding language while keeping every fact identical. No translation chains, no external APIs, no attempt to hide that AI was used.</p>
+                    </article>
+                    <article class="glass-card card">
+                        <div class="card-icon">03</div>
+                        <h3>Fresh-context review</h3>
+                        <p>A second agent with no memory of the drafting critiques the result against the posting, so it catches missed keywords and weak framing the drafter has stopped seeing.</p>
+                    </article>
+                    <article class="glass-card card">
+                        <div class="card-icon">04</div>
+                        <h3>Verified PDFs</h3>
+                        <p>Every PDF is checked for page count, a clean text layer and literal contact details, so an applicant tracking system can actually read it. Then it is inspected by eye.</p>
+                    </article>
+                    <article class="glass-card card">
+                        <div class="card-icon">05</div>
+                        <h3>The profile learns</h3>
+                        <p>Every answer you give to a clarification question is written back to your profile in your own words. A "no" is kept as a confirmed gap, so it is never claimed later and each application starts from better facts than the last.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="pipeline" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">How it works</span>
+                    <h2 class="section-title">Draft, humanize, review, score, compile, verify</h2>
+                    <p class="section-lead">The skill runs these phases in order. The red and green tags mark where it stops for you or checks itself.</p>
+                </div>
+                <ol class="steps">
+                    <li class="step">
+                        <span class="step-num">1</span>
+                        <div class="glass-card step-card">
+                            <h3>JD analysis &amp; mandatory clarification <span class="gate gate-stop">Halts &amp; asks you</span></h3>
+                            <p>Reads the posting and your candidate profile, then cross-references them. Anything the posting requires that the profile doesn't support is a question for you, asked before a single word is drafted.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">2</span>
+                        <div class="glass-card step-card">
+                            <h3>Drafting</h3>
+                            <p>Writes the CV, cover letter and project portfolio in Markdown, then self-critiques for truthfulness, bullet order and structure. No PDF yet: compilation happens once, at the end.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">3</span>
+                        <div class="glass-card step-card">
+                            <h3>Humanization pass <span class="gate gate-check">Facts frozen</span></h3>
+                            <p>Rewrites for natural variation against a checklist. Style only: no fact, number, date or meaning may change.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">4</span>
+                        <div class="glass-card step-card">
+                            <h3>Reviewer subagent <span class="gate gate-check">Fresh eyes</span></h3>
+                            <p>A subagent with a clean context gets the posting, the drafts and the relevant profile excerpt, and returns a structured critique. Its feedback is applied, and the humanization check is re-run on anything it changed.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">5</span>
+                        <div class="glass-card step-card">
+                            <h3>ATS scoring <span class="gate gate-check">0–100 rubric</span></h3>
+                            <p>Scores the final Markdown against a rubric for formatting, structure, content quality and keywords. An invented claim found here sends the run back to phase 1, not into a quiet deletion.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">6</span>
+                        <div class="glass-card step-card">
+                            <h3>Compile &amp; verify PDFs <span class="gate gate-check">Automated + visual</span></h3>
+                            <p>Renders the Markdown to PDF, crops it to its content, runs the verifier, and reads the result to confirm nothing is cut off or misaligned.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">7</span>
+                        <div class="glass-card step-card">
+                            <h3>State update <span class="gate gate-write">Writes your profile</span></h3>
+                            <p>Every answer you gave, from phase 1 or from questions the reviewer or scoring raised later, is saved to the candidate profile in your own words. A "no" goes under Confirmed gaps. Nothing is inferred, and the exact lines added are shown to you. This runs even after short commands like an ATS-only check.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">8</span>
+                        <div class="glass-card step-card">
+                            <h3>Interview prep <span class="gate gate-opt">Optional</span></h3>
+                            <p>On request, a STAR-method prep pass based on the posting and the final documents.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="truth" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Rules 01 &amp; 05 in action</span>
+                    <h2 class="section-title">Ask before lying, then remember the answer</h2>
+                    <p class="section-lead">When the posting asks for something the profile doesn't contain, the skill does not stretch the truth. It stops, asks, and keeps what you told it.</p>
+                </div>
+                <div class="terminal" role="img" aria-label="Illustrative dialogue in which the skill asks about a missing Kubernetes skill">
+                    <div class="terminal-bar"><i></i><i></i><i></i><span>&nbsp;phase 1 · jd analysis</span></div>
+                    <div class="terminal-body">
+                        <p><span class="who user">you ›</span> Tailor my CV for the Senior Backend Engineer posting at Northwind Labs.</p>
+                        <p><span class="who">skill ›</span> I compared the posting with your profile.</p>
+                        <ul>
+                            <li>Matched: Go, PostgreSQL, AWS, mentoring</li>
+                            <li>Not in your profile: <b>Kubernetes in production</b></li>
+                        </ul>
+                        <p><span class="halt">HALT.</span> The posting lists Kubernetes as required. Your profile mentions Docker and AWS ECS, but not Kubernetes. Do you have hands-on Kubernetes experience? I won't add it unless you confirm.</p>
+                        <p><span class="who user">you ›</span> Only Docker and ECS, no Kubernetes.</p>
+                        <p><span class="who">skill ›</span> Understood. The CV will feature Docker and ECS and leave Kubernetes out. Drafting now.</p>
+                    </div>
+                </div>
+                <h3 class="sub-title">…and later, in phase 7, it writes the answer back<small>The profile is the skill's memory. Whatever you confirmed is saved, so the next application starts from it.</small></h3>
+                <div class="terminal" role="img" aria-label="Illustrative profile update recording Kubernetes as a confirmed gap">
+                    <div class="terminal-bar"><i></i><i></i><i></i><span>&nbsp;phase 7 · state update</span></div>
+                    <div class="terminal-body">
+                        <p><span class="who">skill ›</span> Saving what you told me to <b>_private/candidate_profile_alex-rivera.md</b>:</p>
+                        <pre class="diff"><span class="ctx">## Confirmed gaps</span><span class="add">+ Kubernetes: confirmed 2026-03-14 (Northwind Labs posting).
++   "Only Docker and ECS, no Kubernetes."</span></pre>
+                        <p><span class="who">skill ›</span> 1 entry added. Kubernetes is now a confirmed gap, so I won't claim it in any CV. If that changes, tell me and I'll update it.</p>
+                    </div>
+                </div>
+                <p class="caption">Illustrative dialogue and file change written to show the behavior, using a fictional candidate and posting. Only what you state is saved: answers are never inferred or upgraded. The CV it describes is shown <a href="#verify">below</a>.</p>
+            </div>
+        </section>
+
+        <section id="humanize" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Rule 02 in action</span>
+                    <h2 class="section-title">Humanizing means "don't sound like a template"</h2>
+                    <p class="section-lead">The pass changes how a true sentence is said, never what it says.</p>
+                </div>
+                <div class="compare">
+                    <div class="glass-card card before">
+                        <h3>Before</h3>
+                        <p><mark>Orchestrated</mark> a <mark>seamless</mark> migration of a Python monolith into <mark class="keep">6 services</mark> on AWS (ECS, RDS PostgreSQL), <mark>leveraging</mark> modern tooling to reduce deploy time from <mark class="keep">50 minutes to 9</mark>.</p>
+                    </div>
+                    <div class="glass-card card after">
+                        <h3>After</h3>
+                        <p>Split a Python monolith into <mark class="keep">6 services</mark> on AWS (ECS, RDS PostgreSQL), reducing deploy time from <mark class="keep">50 minutes to 9</mark>.</p>
+                    </div>
+                </div>
+                <p class="caption" style="margin: -0.8rem auto 2rem;">Illustrative before/after, written for this page. Highlighted in red: phrases the checklist flags. In green: facts that must not change.</p>
+                <div class="glass-card checklist">
+                    <h3>What the pass looks for</h3>
+                    <ul>
+                        <li>Banned stock phrases ("proven track record", "seamless", "leverage" as a verb…)</li>
+                        <li>Consecutive bullets opening with the same verb</li>
+                        <li>Every sentence the same length and shape</li>
+                        <li>More than one "moreover / furthermore / additionally"</li>
+                        <li>Em-dash overuse</li>
+                        <li>No fact, number, date or title changed</li>
+                    </ul>
+                </div>
+                <div class="note"><strong>Why not a detector-evasion pipeline?</strong> Some humanizer tools push text through chains of machine translation to fool AI-content detectors. That was rejected here: nobody scans a CV for detector signals (a recruiter or a text parser reads it), and every extra translation hop risks drifting a tool name, a metric or a date in a document where each claim must stay true. This skill never tries to hide that AI helped.</div>
+            </div>
+        </section>
+
+        <section id="review" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Rules 03 &amp; scoring</span>
+                    <h2 class="section-title">A second opinion, and a score with a penalty</h2>
+                </div>
+                <div class="split">
+                    <div class="glass-card card">
+                        <h3>The reviewer gets, inline</h3>
+                        <ul>
+                            <li>The job posting, verbatim</li>
+                            <li>The drafted CV, cover letter and portfolio</li>
+                            <li>Only the profile sections relevant to this posting</li>
+                            <li>The ATS score, if already computed</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card card">
+                        <h3>The reviewer returns</h3>
+                        <ul>
+                            <li>Keywords the profile supports but the draft missed</li>
+                            <li>True claims stated too vaguely</li>
+                            <li>Language that still reads as templated</li>
+                            <li>The same metric phrased two different ways across documents</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="caption">The reviewer is told it is reviewing, not researching the company or inventing anything about the candidate. Suggesting a claim the profile lacks is treated like any other gap: it goes back to you as a question.</p>
+
+                <div class="glass-card ats" style="margin-top: 2.5rem;">
+                    <div class="ats-bar" role="img" aria-label="Rubric split: formatting 30, structure 20, content quality 30, keywords 20">
+                        <div class="ats-seg" style="flex: 30; background: var(--accent-cyan);">30<small>Formatting</small></div>
+                        <div class="ats-seg" style="flex: 20; background: var(--accent-blue);">20<small>Structure</small></div>
+                        <div class="ats-seg" style="flex: 30; background: var(--accent-violet); color: #fff;">30<small>Content</small></div>
+                        <div class="ats-seg" style="flex: 20; background: var(--accent-emerald);">20<small>Keywords</small></div>
+                    </div>
+                    <div class="ats-legend">
+                        <div><strong>Formatting:</strong> single column, standard fonts, clean structure.</div>
+                        <div><strong>Structure:</strong> standard headers in a fixed order, skills after experience.</div>
+                        <div><strong>Content quality:</strong> action + what + how + measurable result, checked against the profile.</div>
+                        <div><strong>Keywords:</strong> real posting terms the profile supports. Gaps are acknowledged, never stuffed.</div>
+                    </div>
+                    <div class="penalty"><strong>−100 points</strong> for any invented skill or claim, or for assuming one without asking. It is an automatic fail: the run goes back to phase 1 and asks you.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="verify" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Rule 04 in action</span>
+                    <h2 class="section-title">Output that is checked, not assumed</h2>
+                    <p class="section-lead">Below is a real PDF compiled and verified by the toolchain. The fictional candidate's Markdown was written by hand for this page, so it shows the output stage, not the drafting.</p>
+                </div>
+                <div class="verify">
+                    <ol class="flow">
+                        <li><strong>Markdown → HTML</strong> with a fixed template (single column, standard font, a flexbox header).</li>
+                        <li><strong>Headless Edge → PDF</strong> on a deliberately oversized page, so content can never spill onto a second page.</li>
+                        <li><strong>PyMuPDF crop</strong> measures the real bottom edge of the content and trims the page to it, removing trailing whitespace instead of guessing page height.</li>
+                        <li><strong>Verifier</strong> checks the page count, that the text layer has no garbled characters, and that name, email and phone exist as literal text.</li>
+                        <li><strong>Visual read</strong> confirms nothing is cut off and the header renders as a proper row.</li>
+                    </ol>
+                    <figure class="glass-card preview">
+                        <img src="assets/sample_cv.png" alt="One-page CV for the fictional candidate Alex Rivera, produced by the toolchain" width="910" height="1371" loading="lazy">
+                        <figcaption>Fictional candidate "Alex Rivera". <a href="assets/CV_Alex_Rivera_sample.pdf">Open the PDF ↗</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="run" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Use it</span>
+                    <h2 class="section-title">Run it for yourself</h2>
+                    <p class="section-lead">It is designed to be forked and used by any candidate, not just the author.</p>
+                </div>
+                <ol class="run">
+                    <li class="glass-card"><strong>Fork or clone the repo</strong> and install the dependencies: Python 3.10+, <code>pip install PyMuPDF markdown</code>, and Microsoft Edge for headless PDF rendering.</li>
+                    <li class="glass-card"><strong>Write your candidate profile</strong> in <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: experience, skills, education, positioning, deal-breakers and STAR stories. This file is the only thing the skill is allowed to believe.</li>
+                    <li class="glass-card"><strong>Open Claude Code in the folder</strong> and ask: "Tailor my CV for &lt;posting URL or pasted text&gt;".</li>
+                    <li class="glass-card"><strong>Answer the questions</strong> it asks about gaps. It will not draft until you do, and it saves your answers to the profile afterwards so it doesn't ask twice.</li>
+                    <li class="glass-card"><strong>Collect the results</strong> in <code>_generated/&lt;Company&gt;/</code>. Both <code>_private/</code> and <code>_generated/</code> are gitignored, so your personal data never reaches version control.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="limits" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Transparency</span>
+                    <h2 class="section-title">What it does not do</h2>
+                </div>
+                <div class="glass-card limits">
+                    <ul>
+                        <li><strong>It is AI-assisted writing.</strong> The drafting is done by a language model, and it can still make mistakes. The profile gate, reviewer and scoring reduce that risk but do not remove it, so read every document before it goes out.</li>
+                        <li><strong>It is only as honest as your profile.</strong> The skill trusts the fact file. If the file overstates something, the output will too. Because your answers are written back to it, a wrong answer persists until you correct it, which is why the skill shows you each change.</li>
+                        <li><strong>The ATS score is a heuristic.</strong> It is a rubric for catching formatting and content problems, not a measurement from any real applicant tracking system.</li>
+                        <li><strong>Humanizing is not concealment.</strong> It exists so the text reads like a person wrote it, not to disguise AI involvement.</li>
+                        <li><strong>Tested on Windows.</strong> PDF rendering needs Microsoft Edge. The script looks for it at standard macOS and Linux paths too, but that is untested.</li>
+                        <li><strong>No guarantees.</strong> A well-tailored, truthful CV helps. It does not get you an interview on its own.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built by <a href="https://mtejedorg.github.io/">Marco Tejedor González</a> with Claude Code. Adapted from the open-source <a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">ai-job-search</a> by Mads Lorentzen, whose drafter/reviewer and PDF-verification ideas this builds on.</p>
+            <p>Alex Rivera, Example Payments Inc., Sample Logistics Co. and Northwind Labs are fictional.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
