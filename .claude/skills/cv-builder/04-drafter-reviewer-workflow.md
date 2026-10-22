@@ -10,7 +10,7 @@ Use the `Task` tool with a general-purpose subagent (default model; no model ove
 - The drafted CV, cover letter and project portfolio Markdown, post-humanization.
 - The profile sections this posting drew on: the chosen `### <Family>` positioning profile, the three proof points, the relevant Experience/Project entries and Skills rows. Not the whole file.
 - The length budget from `01-structure-and-style.md` section B and the banned-phrase list from `02-humanization-checklist.md`.
-- The ATS score from Phase 5 if already computed, or ask it to hold off.
+- The fit verdict from Phase 1, and the score and uncovered must-haves from Phase 5 if already computed, or ask it to hold off.
 
 Ask for a structured critique with these headings:
 

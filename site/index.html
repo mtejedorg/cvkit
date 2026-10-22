@@ -112,8 +112,9 @@
                     <li class="step">
                         <span class="step-num">1</span>
                         <div class="glass-card step-card">
-                            <h3>JD analysis &amp; mandatory clarification <span class="gate gate-stop">Halts &amp; asks you</span></h3>
-                            <p>Reads the posting and your candidate profile, then cross-references them. Every item the profile doesn't back, hard requirement or soft skill, is a question for you, asked before a single word is drafted. Then it names the positioning profile and the three proof points it will lead with.</p>
+                            <h3>JD analysis, fit check &amp; clarification <span class="gate gate-stop">Halts &amp; asks you</span></h3>
+                            <p>Saves the posting as <code>JD.md</code>, reads it against your candidate profile and rates the fit (location, permit, seniority, domain years, language). If the fit looks unlikely it says why and asks before going on.</p>
+                            <p>It then cross-references the posting with your profile. Every item the profile doesn't back, hard requirement or soft skill, is a question for you, asked before a single word is drafted. Then it names the positioning profile and the three proof points it will lead with.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -140,8 +141,8 @@
                     <li class="step">
                         <span class="step-num">5</span>
                         <div class="glass-card step-card">
-                            <h3>ATS scoring <span class="gate gate-check">0–100 rubric</span></h3>
-                            <p>Scores the final Markdown against a rubric for formatting, structure, content quality and keywords. An invented claim found here sends the run back to phase 1, not into a quiet deletion.</p>
+                            <h3>Gates &amp; score <span class="gate gate-check">2 gates + 0–100</span></h3>
+                            <p>Two pass/fail gates (format, truth), then a score where half the points are evidence: how many of the posting's must-haves your profile backs and the CV shows. An invented claim found here sends the run back to phase 1, not into a quiet deletion.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -266,19 +267,19 @@
                 <p class="caption">The reviewer is told it is reviewing, not researching the company or inventing anything about the candidate. Suggesting a claim the profile lacks is treated like any other gap: it goes back to you as a question.</p>
 
                 <div class="glass-card ats" style="margin-top: 2.5rem;">
-                    <div class="ats-bar" role="img" aria-label="Rubric split: formatting 30, structure 20, content quality 30, keywords 20">
-                        <div class="ats-seg" style="flex: 30; background: var(--accent-cyan);">30<small>Formatting</small></div>
-                        <div class="ats-seg" style="flex: 20; background: var(--accent-blue);">20<small>Structure</small></div>
-                        <div class="ats-seg" style="flex: 30; background: var(--accent-violet); color: #fff;">30<small>Content</small></div>
-                        <div class="ats-seg" style="flex: 20; background: var(--accent-emerald);">20<small>Keywords</small></div>
+                    <div class="ats-bar" role="img" aria-label="Score split: evidence coverage 50, placement 20, content quality 15, keywords 15">
+                        <div class="ats-seg" style="flex: 50; background: var(--accent-cyan);">50<small>Evidence</small></div>
+                        <div class="ats-seg" style="flex: 20; background: var(--accent-blue);">20<small>Placement</small></div>
+                        <div class="ats-seg" style="flex: 15; background: var(--accent-violet); color: #fff;">15<small>Content</small></div>
+                        <div class="ats-seg" style="flex: 15; background: var(--accent-emerald);">15<small>Keywords</small></div>
                     </div>
                     <div class="ats-legend">
-                        <div><strong>Formatting:</strong> single column, standard fonts, clean structure.</div>
-                        <div><strong>Structure:</strong> standard headers in a fixed order, skills after experience.</div>
+                        <div><strong>Evidence coverage:</strong> each ranked must-have counts when the profile backs it and the CV shows it with evidence.</div>
+                        <div><strong>Placement:</strong> the three leading proof points in the summary and first bullets.</div>
                         <div><strong>Content quality:</strong> action + what + how + measurable result, checked against the profile.</div>
                         <div><strong>Keywords:</strong> real posting terms the profile supports. Gaps are acknowledged, never stuffed.</div>
                     </div>
-                    <div class="penalty"><strong>−100 points</strong> for any invented skill or claim, or for assuming one without asking. It is an automatic fail: the run goes back to phase 1 and asks you.</div>
+                    <div class="penalty"><strong>Truth gate:</strong> one invented skill or claim, or one assumed without asking, fails the run: it goes back to phase 1 and asks you. The format gate (single column, standard headings, order, length) is pass/fail too.</div>
                 </div>
             </div>
         </section>
@@ -333,7 +334,7 @@
                     <ul>
                         <li><strong>It is AI-assisted writing.</strong> The drafting is done by a language model, and it can still make mistakes. The profile gate, reviewer and scoring reduce that risk but do not remove it, so read every document before it goes out.</li>
                         <li><strong>It is only as honest as your profile.</strong> The skill trusts the fact file. If the file overstates something, the output will too. Because your answers are written back to it, a wrong answer persists until you correct it, which is why the skill shows you each change.</li>
-                        <li><strong>The ATS score is a heuristic.</strong> It is a rubric for catching formatting and content problems, not a measurement from any real applicant tracking system.</li>
+                        <li><strong>The score and the fit verdict are heuristics.</strong> They catch problems and flag likely screens (location, permit, seniority), but they are not a measurement from any real applicant tracking system. Each application's score and outcome are logged so you can check whether they predicted anything.</li>
                         <li><strong>Humanizing is not concealment.</strong> It exists so the text reads like a person wrote it, not to disguise AI involvement.</li>
                         <li><strong>Tested on Windows.</strong> PDF rendering needs Microsoft Edge. The script looks for it at standard macOS and Linux paths too, but that is untested.</li>
                         <li><strong>No guarantees.</strong> A well-tailored, truthful CV helps. It does not get you an interview on its own.</li>

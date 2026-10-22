@@ -8,9 +8,11 @@ For any CV, cover-letter or job-application task, follow **[.claude/skills/cv-bu
 - Workspace resolution (where your private files live)
 - JD analysis with a question for every gap, hard or soft
 - Positioning profile and proof-point selection
-- Drafting within a length budget, humanization pass, fresh-context reviewer, ATS scoring
+- A fit check (location, permit, seniority, domain years, language) and a saved `JD.md` before drafting
+- Drafting within a length budget, humanization pass, fresh-context reviewer
+- Format and truth gates, then an evidence-coverage score
 - A4 PDF compilation, public (phone-less) variants, verification
-- Writing your answers back to the profile and an applications log
+- Writing your answers back to the profile and an applications log (channel, fit, score, sent, outcome), and an outcomes pass that checks what the score predicted
 
 ## Setup
 
