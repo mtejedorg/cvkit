@@ -12,7 +12,7 @@ Defaults for every generated document. Adapt them to your market in your fork; t
 6. Education
 7. Languages
 
-Periods without an employer get an Experience entry of their own (e.g. "Independent Game Developer | Self-employed"), with real work listed. Never leave an unexplained gap.
+Periods without an employer are never left as an unexplained gap, but where they go is a parsing decision the profile makes (`## Preferences` or a `cv placement:` line on the entry): a short recent period of independent work usually belongs under **Additional Experience & Projects** with its dates, so that a parser still reads the longest employer as the latest experience. For the same reason, two successive titles inside one continuous employment stay on **one role line** with both titles and the full date range; the context line names the phases. Splitting them into two entries makes many parsers count only the last one.
 
 ## B. Length budget
 
