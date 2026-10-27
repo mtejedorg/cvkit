@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: project-init-from-readme
+expected_outcome: |
+  The run creates docs/site/ with index.html, mechanics.html, tech.html, style.css and portfolio.json, plus .github/workflows/pages.yml. The manifest validates (slug orbit-courier, site https://example.github.io/orbit-courier/, repo https://github.com/example/orbit-courier, blurb within 45 words using README facts only). The mechanics page describes districts, routes, parcel weight and the timer; the tech page names Godot 4.3, SaveManager, the 40 headless tests and the AI-assisted workflow. No feature beyond the README is claimed and no image is fabricated.
+context:
+  scaffold_script: place-files.sh

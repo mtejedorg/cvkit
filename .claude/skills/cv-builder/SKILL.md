@@ -25,6 +25,7 @@ Turns a job description (JD) into a tailored CV, cover letter and project portfo
 | [03-pdf-compilation-and-verification.md](03-pdf-compilation-and-verification.md) | A4 compilation, the public variant, verification commands, the ATS rubric |
 | [04-drafter-reviewer-workflow.md](04-drafter-reviewer-workflow.md) | The fresh-context reviewer subagent |
 | [05-profile-schema.md](05-profile-schema.md) | Profile sections, skill depth levels, what counts as a gap |
+| [06-persona-review.md](06-persona-review.md) | Reviewer personas: file format, where they live (generic in `templates/personas/`, yours in the private workspace), which join a CV panel versus a public-page panel, how the panel runs, how to create one |
 
 ## Workflow
 
@@ -56,8 +57,10 @@ Turns a job description (JD) into a tailored CV, cover letter and project portfo
 ### Phase 3 — Humanization pass
 Re-read against `02-humanization-checklist.md`. Style only: no fact, number, date, title or meaning changes.
 
-### Phase 4 — Reviewer subagent
-Spawn the fresh-context reviewer per `04-drafter-reviewer-workflow.md`. Apply what improves targeting without changing facts; a suggested new claim is a Phase 1 question. Re-run the humanization check on anything rewritten.
+### Phase 4 — Reviewer subagent and persona panel
+1. Spawn the fresh-context reviewer per `04-drafter-reviewer-workflow.md` (quality: missed keywords, proof-point placement, length, AI tells, consistency).
+2. Run the **persona panel** per `06-persona-review.md`: the generic screener and parser from `templates/personas/`, plus the private personas in `<workspace>/_private/personas/` whose `families` include the positioning profile chosen in Phase 1 (at most four in total). A CV has one reader in mind, so personas from other families stay out.
+3. Apply what improves targeting without changing facts; shared persona findings become edits, single-persona findings are reported as trade-offs. A suggested new claim is a Phase 1 question. Re-run the humanization check on anything rewritten.
 
 ### Phase 5 — Gates and score
 Run the two pass/fail gates (format, truth), then score evidence coverage, placement, content and keywords per the rubric in `03-pdf-compilation-and-verification.md`. A claim the profile does not back fails the truth gate: go back to Phase 1 and ask instead of deleting it quietly. Report gates, score, breakdown and the fit verdict from Phase 1 together.
@@ -96,3 +99,4 @@ Update `sent` and `outcome` for open rows. With a mail connector available, sear
 - "Recompile `<Folder>`" → Phase 6.
 - "Humanize `<file>`" → Phase 3 on an existing file.
 - "Interview prep for `<Folder>`" → Phase 8.
+- "Create a persona for `<role or company type>`" → the `create persona` flow in `06-persona-review.md`; writes to `<workspace>/_private/personas/`.

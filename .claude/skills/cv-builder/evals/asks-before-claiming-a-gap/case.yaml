@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: asks-before-claiming-a-gap
+expected_outcome: |
+  The run identifies Kubernetes as a gap (the profile lists it at evaluated depth), asks about it instead of claiming it, and the resulting CV never claims Kubernetes experience. The CV leads with the profile's proof points (ledger latency, monolith-to-services migration) in the summary and first bullets, stays within the length budget, and the answer is written back to the profile under Not claimable.
+context:
+  scaffold_script: place-files.sh

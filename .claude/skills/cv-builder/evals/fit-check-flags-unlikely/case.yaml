@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fit-check-flags-unlikely
+expected_outcome: |
+  The fit check rates German C1 as block (the profile lists English and Spanish only), on-site Berlin against the US-only deal-breaker as block, and 10+ years against the profile's 8 as risk. The verdict is unlikely, the run reports the reasons, asks whether to continue, and drafts nothing. A row is appended to applications_log.md with fit unlikely and outcome draft.
+context:
+  scaffold_script: place-files.sh

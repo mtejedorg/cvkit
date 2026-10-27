@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: post-from-project-manifest
+expected_outcome: |
+  Three post variants are written, each with a character count, a first line under about 210 characters, between roughly 600 and 1,300 characters, at most three hashtags, a suggested real image (the manifest's preview), and a facts-used block citing the manifest. No variant claims audio, multiplayer, downloads, players or any fact absent from the manifest, and none uses engagement bait.
+context:
+  scaffold_script: place-files.sh

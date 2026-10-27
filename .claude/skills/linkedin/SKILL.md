@@ -22,7 +22,7 @@ Limits, section rules and post patterns are in [references/sections.md](referenc
 
 ## Commands
 
-- **audit**: compare `live.md` with the profile. Flag any live claim the profile does not back, numbers not in `verified metrics`, banned phrases, sections over limit, and missing proof points. Output a table: section, finding, fix. Nothing is rewritten yet.
+- **audit**: compare `live.md` with the profile. Flag any live claim the profile does not back, numbers not in `verified metrics`, banned phrases, sections over limit, and missing proof points. Then run the **persona panel** with every persona whose `reviews` lists `linkedin` (generic ones in cvkit `templates/personas/`, the user's in `<workspace>/_private/personas/`), per the cv-builder skill's `06-persona-review.md`: a LinkedIn profile is read by every kind of reader, so all of them join. Output a table: section, finding, persona(s), fix. Nothing is rewritten yet.
 - **sync**: rewrite the sections that `audit` flagged (or all, on request) within limits, from the chosen positioning profile. Each section goes to its own file with a character count line at the top. `CHANGES.md` lists old and new per section. Ask before touching a section the user wrote in a voice they like; the profile owner's phrasing beats the skill's.
 - **post**: draft a post from a source the user names: a project manifest (`portfolio.json`), a repo README, a CV folder, an event. Three variants with different hooks, each with its character count, a suggested real image (a capture, never generated), and the facts it relies on with their source. See `references/posts.md`.
 - **message**: a reply to a recruiter, a connection note, a follow-up after applying, or a thank-you after an interview. Short, specific, one ask. The connection note respects the 300-character cap. Never includes the phone number unless the user says to.
@@ -34,6 +34,7 @@ Limits, section rules and post patterns are in [references/sections.md](referenc
 2. Draft. Keep each section under its limit with a safety margin of about five percent; the editor counts differently from a text file.
 3. Humanization pass, style only.
 4. Truth gate: every sentence traceable to the profile (or, for a post, to the named source). A claim without a source is a question for the user, asked in one `AskUserQuestion`, and the answer is written back to the profile the way cv-builder's Phase 7 does.
+4b. Persona panel on the drafted sections or post (all personas whose `reviews` lists `linkedin`); shared findings become edits, single-persona findings are reported as trade-offs. Facts never change here.
 5. Write the files, show the character counts and the diff against live, and stop. Pasting is the user's step. When they confirm, update `live.md` with the pasted text and the date.
 
 ## Boundaries

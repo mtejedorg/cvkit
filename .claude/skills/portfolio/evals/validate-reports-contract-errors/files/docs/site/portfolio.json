@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "name": "Example Game",
+  "slug": "Example Game",
+  "status": "in development",
+  "engine": "Godot 4",
+  "blurb": "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+  "tags": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f"
+  ],
+  "preview": "assets/preview.png",
+  "site": "https://example.github.io/example-game/",
+  "repo": "https://github.com/example/example-game",
+  "pages": {
+    "mechanics": "mechanics.html",
+    "tech": "tech.html"
+  },
+  "updated": "27/10/2026"
+}

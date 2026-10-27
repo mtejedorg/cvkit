@@ -53,8 +53,10 @@ Three Claude Code skills that share one private fact file and one rule: nothing 
 ## Repository structure
 
 ```
-cv-builder/
-├── .claude/skills/cv-builder/   # the skill: SKILL.md + 01…05 rule files
+cvkit/
+├── .claude/skills/cv-builder/   # SKILL.md + 01…06 rule files + evals/
+├── .claude/skills/portfolio/    # SKILL.md + references/ + assets/ + scripts/portfolio_tool.py + evals/
+├── .claude/skills/linkedin/     # SKILL.md + references/ + assets/ + evals/
 ├── cvtool/                      # toolchain: workspace, compile, verify, privacy
 ├── templates/                   # A4 HTML/CSS template, profile template, privacy patterns example
 ├── tests/                       # pytest suite with fictional fixtures
@@ -96,6 +98,10 @@ The CV header must follow the HTML convention in [01-structure-and-style.md](.cl
 - **Fresh-context review.** A subagent with no memory of the drafting critiques the result.
 - **Verified PDFs.** Page caps, clean text layer, section order and contact details are checked by script, then by eye.
 - **Private by construction.** Workspace outside the repo, privacy check on every commit, public builds without the phone.
+
+## Reviewer personas
+
+Every skill puts its output in front of a panel of readers before you see it: a recruiter screener, the tracking-system parser and a generic hiring manager ship in `templates/personas/`. The readers who matter most, the people who would hire you for the roles you target, are yours to define: say "create a persona for <role or company type>" and the skill drafts one into `<workspace>/_private/personas/` from your positioning profiles and past postings. A CV panel uses only the personas relevant to that posting; the portfolio and LinkedIn panels use all of them, because those pages face everyone. Rules in [06-persona-review.md](.claude/skills/cv-builder/06-persona-review.md).
 
 ## Testing the skills
 

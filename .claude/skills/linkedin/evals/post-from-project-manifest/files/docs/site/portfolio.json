@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "name": "Orbit Courier",
+  "slug": "orbit-courier",
+  "status": "prototype",
+  "engine": "Godot 4.3",
+  "blurb": "A top-down browser delivery game: three districts, twelve routes, parcels whose weight changes the drone's handling. Built solo with AI coding agents.",
+  "tags": [
+    "Godot 4.3",
+    "GDScript"
+  ],
+  "preview": "assets/preview.jpg",
+  "site": "https://example.github.io/orbit-courier/",
+  "repo": "https://github.com/example/orbit-courier",
+  "pages": {
+    "mechanics": "mechanics.html",
+    "tech": "tech.html"
+  },
+  "updated": "2026-10-27"
+}

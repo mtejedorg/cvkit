@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: headline-and-about-within-limits
+expected_outcome: |
+  The run writes _generated/LinkedIn/<date>/headline.md and about.md with a character count on top. The headline is at most 220 characters and names Go, Python and AWS or backend engineering; About is at most 2,600 characters, opens with the ledger latency or the migration proof point, is in first person, mentions nothing at evaluated or supervised depth (no Kubernetes), uses no banned phrase, and carries no phone number.
+context:
+  scaffold_script: place-files.sh
