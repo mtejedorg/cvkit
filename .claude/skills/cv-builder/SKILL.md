@@ -50,6 +50,7 @@ Turns a job description (JD) into a tailored CV, cover letter and project portfo
 7. Keep a running list of every answer, in the user's words, for Phase 7.
 
 ### Phase 2 — Drafting
+0. **Start from the closest generic variant.** If `<workspace>/_generated/Generic_<Family>/` exists for the positioning profile chosen in Phase 1, copy its CV and letter into the new application folder and edit from there; otherwise start from `<workspace>/_generated/Generic/`. The variants are internal starting points that already carry the family's summary, bullet order and skills rows, so a tailored run spends its effort on the posting, not on re-deriving the base. They are never sent as they are.
 1. Draft the CV, cover letter and project portfolio in Markdown per `01-structure-and-style.md`: header convention, section order, **length budget**, proof points in the summary and bullets 1–3, metrics per `## Preferences`.
 2. Self-check: every claim traceable to the profile; no number outside `verified metrics`; a blank line before every list; no "Tailored for…" meta text.
 3. Do not compile yet.
@@ -103,6 +104,7 @@ The profile's `## Preferences` may tighten this (`approval: explicit` means even
 
 - "Tailor my CV for `<JD or URL>`" → Phases 0–7.
 - "Regenerate my generic CV" → Phases 0, 2–6 with the `### General` positioning profile into `_generated/Generic/`, compiled both normally and with `--public`.
+- "Regenerate my generic CVs" (plural) → the same for every positioning profile, one folder each (`_generated/Generic_<Family>/`), then the persona panel with all personas on the General one.
 - "What's the fit and score for `<company>`'s posting?" → Phases 0, 1 and 5 (plus 7 if a question was asked).
 - "Update my application outcomes" → Phase 9.
 - "Recompile `<Folder>`" → Phase 6.
