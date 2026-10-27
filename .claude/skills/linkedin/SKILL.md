@@ -14,6 +14,17 @@ LinkedIn has no write API for a personal profile, so this skill produces **paste
 
 Limits, section rules and post patterns are in [references/sections.md](references/sections.md) and [references/posts.md](references/posts.md). Read the one you need.
 
+## Reading and editing the live profile
+
+LinkedIn has no personal-profile API, so the skill works through a browser, and the user never copies text by hand:
+
+1. Open the user's public profile URL (from `## Identity`) in the built-in browser pane. If LinkedIn asks for a login, stop and ask the user to sign in themselves in the pane; the skill never types credentials.
+2. Read the sections from the page (headline, About, each experience entry, skills, featured, education, contact info) with the page-reading tools, expanding "see more" where needed, and write them to `live.md` with today's date. That is the seed for `audit`.
+3. Editing stays with the user by default: the skill produces the approved text and the user pastes it. Only when the user explicitly asks the skill to apply an edit in the browser does it open the section's edit dialog, fill the approved text, show the result, and wait for a yes before saving. One section per approval; never a bulk save.
+4. Settings (open-to-work, contact visibility) are read the same way and changed only on an explicit per-setting yes.
+
+If the browser pane is unavailable, fall back to a LinkedIn data export (Settings → Data privacy → "Get a copy of your data") that the user provides.
+
 ## Workspace files
 
 - `<workspace>/_private/linkedin/live.md`: the text currently on the profile, one `## Section` per LinkedIn section, with a `last pasted:` date. Seed it from the user's pasted sections or a LinkedIn data export; if absent, `audit` asks for it. Only the user confirms a paste; the skill never marks something live on its own.
