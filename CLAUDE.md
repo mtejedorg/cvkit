@@ -1,32 +1,28 @@
-# CV Builder — AI-assisted CV, cover letter and portfolio tailoring
+# cvkit — career tooling skills
 
-A reusable Claude Code skill for tailoring CVs, cover letters and project portfolios to specific job postings. Fork it, write your profile, point it at a posting.
+Three Claude Code skills that share one private fact file and one rule: nothing is claimed that the file does not back. Fork it, write your profile, point the skills at a posting, a repo or your LinkedIn page.
 
-## Entry point
+## Skills and entry points
 
-For any CV, cover-letter or job-application task, follow **[.claude/skills/cv-builder/SKILL.md](.claude/skills/cv-builder/SKILL.md)**. It covers:
-- Workspace resolution (where your private files live)
-- JD analysis with a question for every gap, hard or soft
-- Positioning profile and proof-point selection
-- A fit check (location, permit, seniority, domain years, language) and a saved `JD.md` before drafting
-- Drafting within a length budget, humanization pass, fresh-context reviewer
-- Format and truth gates, then an evidence-coverage score
-- A4 PDF compilation, public (phone-less) variants, verification
-- Writing your answers back to the profile and an applications log (channel, fit, score, sent, outcome), and an outcomes pass that checks what the score predicted
+| Task | Follow |
+|---|---|
+| Any CV, cover-letter or job-application task | **[.claude/skills/cv-builder/SKILL.md](.claude/skills/cv-builder/SKILL.md)**: workspace resolution, JD analysis with a question for every gap, fit check and saved `JD.md`, positioning profile and proof points, drafting within a length budget, humanization, fresh-context review, format and truth gates with an evidence score, A4 PDFs with phone-less public variants, write-back to the profile and the applications log, outcomes. |
+| A portfolio site, a project page for a repo, GitHub Pages, a project card or preview | **[.claude/skills/portfolio/SKILL.md](.claude/skills/portfolio/SKILL.md)**: hub and project roles, the `portfolio.json` contract, captures, Pages workflow, discovery through the git remote and `gh`. |
+| Anything LinkedIn: headline, About, experience, skills, posts, recruiter replies, settings | **[.claude/skills/linkedin/SKILL.md](.claude/skills/linkedin/SKILL.md)**: audit against the profile, paste-ready sections within limits, posts and messages, a record of what is live. |
 
 ## Setup
 
 1. **Fork or clone this repo.** Install the dependencies:
 
    ```bash
-   pip install PyMuPDF markdown pytest
+   pip install PyMuPDF markdown pytest Pillow
    ```
 
    PDF rendering uses Microsoft Edge (headless). The script finds it at the standard Windows, macOS and Linux paths, or set `EDGE_PATH`.
 
 2. **Choose where your private data lives.** Two options:
    - *Simple:* keep it inside this folder. `_private/` and `_generated/` are gitignored.
-   - *Recommended:* a separate private folder or private repo (e.g. `../career-personal/`), so the public skill repo never holds a single personal file. Copy `cv-builder.config.example.json` to `cv-builder.config.json` (gitignored) and set `workspace` to that folder, or export `CV_WORKSPACE`. The scripts and the skill resolve the workspace in that order: `CV_WORKSPACE`, config file, this repo.
+   - *Recommended:* a separate private folder or private repo (e.g. `../career-personal/`), so the public skill repo never holds a single personal file. Copy `cvkit.config.example.json` to `cvkit.config.json` (gitignored) and set `workspace` to that folder, or export `CV_WORKSPACE`. The scripts and the skill resolve the workspace in that order: `CV_WORKSPACE`, config file, this repo.
 
 3. **Write your candidate profile.** Copy `templates/candidate_profile_template.md` to `<workspace>/_private/candidate_profile_<your-name>.md` and fill it in. The headings are a contract with the skill; [05-profile-schema.md](.claude/skills/cv-builder/05-profile-schema.md) explains each section. The parts that matter most:
    - **Positioning profiles**: one per kind of role you apply to, each with a 50–70 word summary and three leading proof points.
@@ -69,7 +65,7 @@ cv-builder/
 ├── verify_pdf.py                # CLI: page caps, text layer, order, forbidden text
 ├── privacy_check.py             # CLI: no personal data in tracked files
 ├── compile_pdfs.ps1 / .bat      # interactive compile launcher (Windows)
-├── cv-builder.config.example.json
+├── cvkit.config.example.json
 └── .githooks/pre-commit
 
 <workspace>/                     # yours, private, never in this repo
@@ -100,6 +96,10 @@ The CV header must follow the HTML convention in [01-structure-and-style.md](.cl
 - **Fresh-context review.** A subagent with no memory of the drafting critiques the result.
 - **Verified PDFs.** Page caps, clean text layer, section order and contact details are checked by script, then by eye.
 - **Private by construction.** Workspace outside the repo, privacy check on every commit, public builds without the phone.
+
+## Testing the skills
+
+Each skill has test cases under `evals/<case>/` (a prompt, an expected outcome, graders, input files). With Claude Code 2.1.269 or later, from a skill folder: `claude plugin eval . --allow-tools Write,Edit,Bash --scaffold`. These are real model runs and are billed.
 
 ## Git and privacy
 

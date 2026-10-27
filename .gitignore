@@ -11,4 +11,4 @@ __pycache__/
 *.pyc
 
 # Local workspace pointer (points at your private career folder)
-cv-builder.config.json
+cvkit.config.json

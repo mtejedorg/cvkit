@@ -1,6 +1,6 @@
 ---
 name: cv-builder
-description: Tailor a CV, cover letter, and project portfolio to a specific job posting, using the candidate profile as the only source of truth. Triggers on requests to apply, tailor a CV/resume, write a cover letter, build a project portfolio, regenerate a generic CV, or check the fit and score for a job description, or update application outcomes.
+description: Tailor a CV, cover letter and project portfolio to a specific job posting, using the candidate profile as the only source of truth, then check fit, review, score, compile verified A4 PDFs and record the application. Use this for anything about applying to a job: a posting URL or pasted text, "apply to this", "is this role a fit", a resume or CV rewrite, a cover letter, a generic CV, a phone-less public CV, an ATS or fit score, interview prep for an application, or updating what happened to applications already sent. Trigger even when the user only pastes a job description without asking for anything.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Task, AskUserQuestion
 ---
 
@@ -29,7 +29,7 @@ Turns a job description (JD) into a tailored CV, cover letter and project portfo
 ## Workflow
 
 ### Phase 0 — Workspace
-1. Resolve the workspace: `CV_WORKSPACE` env var, else `cv-builder.config.json` next to this repo, else the repo itself. `_private/` and `_generated/` live there.
+1. Resolve the workspace: `CV_WORKSPACE` env var, else `cvkit.config.json` next to this repo, else the repo itself. `_private/` and `_generated/` live there.
 2. Read the profile in full and `<workspace>/_private/applications_log.md` if it exists (previous postings and the answers they produced).
 
 ### Phase 1 — JD analysis, fit check and mandatory clarification
@@ -75,11 +75,11 @@ Every answer the user gave in this run goes into the profile, in their words:
 4. Append one row to `<workspace>/_private/applications_log.md` (columns in `templates/applications_log_template.md`): date, folder, role, positioning, channel, fit verdict, score, sent date, outcome, nuances (gaps asked and the answers). Score and fit come from Phases 1 and 5. `sent` stays blank and `outcome` is `draft` until the user says the application went out; never guess either.
 5. Runs this even after partial commands (a score-only check that asked a question).
 
-### Phase 9 — Outcomes (on request, or when a log row is stale)
-Update `sent` and `outcome` for open rows. With a mail connector available, search the mailbox by company and read the reply; otherwise ask the user. Outcome values: `draft`, `sent`, `viewed`, `no-reply` (21+ days), `rejected`, `interview`, `offer`, `withdrawn`; add the date and the reason when the email gives one. Then compare score and fit against outcomes and report what held up and what did not. With fewer than 10 decided rows, say the sample is too small to change the rubric.
-
 ### Phase 8 — Interview prep (optional)
 On request: STAR-method prep from `## STAR stories` (say which are still `draft`), the JD and the final documents.
+
+### Phase 9 — Outcomes (on request, or when a log row is stale)
+Update `sent` and `outcome` for open rows. With a mail connector available, search the mailbox by company and read the reply; otherwise ask the user. Outcome values: `draft`, `sent`, `viewed`, `no-reply` (21+ days), `rejected`, `interview`, `offer`, `withdrawn`; add the date and the reason when the email gives one. Then compare score and fit against outcomes and report what held up and what did not. With fewer than 10 decided rows, say the sample is too small to change the rubric.
 
 ## Privacy rules
 

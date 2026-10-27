@@ -6,7 +6,7 @@ Usage:
     python compile_all_pdfs.py                  # every folder, only stale PDFs
 
 Folders live in <workspace>/_generated/. The workspace is resolved from
-CV_WORKSPACE, cv-builder.config.json, or this repository (see cvtool/workspace.py).
+CV_WORKSPACE, cvkit.config.json, or this repository (see cvtool/workspace.py).
 --public writes <name>_public.pdf with every <span class="private"> removed.
 """
 

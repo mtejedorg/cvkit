@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "portfolio.schema.json",
+  "title": "Portfolio project manifest",
+  "type": "object",
+  "required": ["schema", "name", "slug", "status", "blurb", "tags", "preview", "site", "repo", "pages", "updated"],
+  "properties": {
+    "schema": { "const": 1 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "slug": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "status": { "enum": ["in development", "released", "prototype", "archived"] },
+    "engine": { "type": "string", "maxLength": 60 },
+    "blurb": { "type": "string", "minLength": 1, "description": "At most 45 words." },
+    "tags": { "type": "array", "items": { "type": "string", "maxLength": 40 }, "maxItems": 5 },
+    "preview": { "type": "string", "pattern": "\\.(jpe?g)$" },
+    "site": { "type": "string", "format": "uri" },
+    "repo": { "type": "string", "format": "uri" },
+    "pages": { "type": "object", "additionalProperties": { "type": "string" } },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "base_url": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}

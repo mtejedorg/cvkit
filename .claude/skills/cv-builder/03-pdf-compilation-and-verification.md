@@ -8,7 +8,7 @@
 2. Headless Microsoft Edge prints real A4 pages. CSS break rules keep a role title with its first bullets and a heading with its section.
 3. `--public` writes `<name>_public.pdf` with every `<span class="private">` removed (the phone). One Markdown source, two PDFs.
 
-Edge is found at the standard install paths or through `EDGE_PATH`. The workspace comes from `CV_WORKSPACE`, then `cv-builder.config.json`, then the repo itself.
+Edge is found at the standard install paths or through `EDGE_PATH`. The workspace comes from `CV_WORKSPACE`, then `cvkit.config.json`, then the repo itself.
 
 ```bash
 python compile_all_pdfs.py "<Folder>"            # this folder, all .md files

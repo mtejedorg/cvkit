@@ -1,7 +1,7 @@
 """Locate the workspace that holds `_private/` (profile) and `_generated/` (applications).
 
 Precedence: the CV_WORKSPACE environment variable, then the `workspace` key of
-`cv-builder.config.json` next to the skill, then the repository root itself.
+`cvkit.config.json` next to the skill, then the repository root itself.
 """
 
 from __future__ import annotations
@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Mapping
 
-CONFIG_FILENAME = "cv-builder.config.json"
+CONFIG_FILENAME = "cvkit.config.json"
 ENV_VAR = "CV_WORKSPACE"
 
 
