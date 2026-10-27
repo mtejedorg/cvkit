@@ -84,6 +84,15 @@ On request: STAR-method prep from `## STAR stories` (say which are still `draft`
 ### Phase 9 — Outcomes (on request, or when a log row is stale)
 Update `sent` and `outcome` for open rows. With a mail connector available, search the mailbox by company and read the reply; otherwise ask the user. Outcome values: `draft`, `sent`, `viewed`, `no-reply` (21+ days), `rejected`, `interview`, `offer`, `withdrawn`; add the date and the reason when the email gives one. Then compare score and fit against outcomes and report what held up and what did not. With fewer than 10 decided rows, say the sample is too small to change the rubric.
 
+## Approval model
+
+The user decides; the skill does the boring work. Two kinds of steps:
+
+- **Mechanical, run without asking:** reading files, cross-referencing, compiling PDFs, running the verifier and the privacy check, scoring, resizing images, appending a log row marked `draft`.
+- **Decisions and text, shown first and done only on a yes:** the fit verdict and whether to continue, the positioning profile and proof points, every clarification answer written back to the profile (show the exact lines), any change to an existing application folder, the final documents before they are declared ready, and anything that leaves the workspace (a site, a message, a post, a commit). One `AskUserQuestion` per decision point, with the proposed text in it; silence is not approval.
+
+The profile's `## Preferences` may tighten this (`approval: explicit` means even small rewrites are shown before being saved) but never loosen it below the list above.
+
 ## Privacy rules
 
 - The phone number is written only inside `<span class="private">` in document headers. The `--public` build removes it; use that build for anything that goes on a website.

@@ -33,6 +33,10 @@ The tool script does the deterministic parts (detect, remote parsing, validation
 
 Plain sentences, specific facts, no marketing words. The banned list in the cv-builder skill's `02-humanization-checklist.md` applies here too. Say "built solo with AI coding agents" once per project, on its tech page, naming the agents the repo actually uses; the author wants that visible, and it is true. Any figure (players, zones, tests, fps) must appear in a repo document; cite the file in an HTML comment next to it.
 
+## Approval model
+
+Mechanical steps run without asking: detecting the role, parsing the remote, validating manifests, discovering projects, resizing previews, running the checks and the privacy scan. Everything a reader will see is shown first and written only on a yes: the pitch, each page's copy, the blurb and tags in the manifest, which capture becomes the preview, card changes on the hub, and the `publish` commit. One question per decision, with the proposed text in it. The profile's `## Preferences` → `approval:` line may make this stricter, never looser.
+
 ## Boundaries
 
 - Touch only the site folder, the manifest, the Pages workflow and the single capture helper. Never change gameplay or product code, build settings or assets outside the site folder.

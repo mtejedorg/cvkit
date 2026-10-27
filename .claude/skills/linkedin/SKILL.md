@@ -37,6 +37,10 @@ Limits, section rules and post patterns are in [references/sections.md](referenc
 4b. Persona panel on the drafted sections or post (all personas whose `reviews` lists `linkedin`); shared findings become edits, single-persona findings are reported as trade-offs. Facts never change here.
 5. Write the files, show the character counts and the diff against live, and stop. Pasting is the user's step. When they confirm, update `live.md` with the pasted text and the date.
 
+## Approval model
+
+Nothing on LinkedIn changes without the user pasting it, so the skill's job is to make every decision explicit before that moment. Mechanical steps run without asking: reading the profile and `live.md`, counting characters, checking limits, running the humanization and truth checks, running the persona panel. Everything else is shown and done only on a yes: which sections to rewrite, each rewritten section, each post variant chosen, each message, each settings recommendation, and the update of `live.md` after a paste. `settings` asks the user for open-to-work visibility, contact exposure and featured items the first time, then stores the answers under the profile's `## Preferences` (`linkedin open-to-work:`, `linkedin language:`) and uses them without re-asking until the user changes them.
+
 ## Boundaries
 
 - Never fabricate engagement, follower counts, endorsements or recommendations. Recommendation requests are drafted as messages to a named person the user chooses.
