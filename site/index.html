@@ -39,14 +39,14 @@
             <div class="container hero-inner">
                 <span class="badge">Open-source Claude Code skills</span>
                 <h1>Career tooling that is <span class="text-gradient">not allowed to lie.</span></h1>
-                <p class="lead">cvkit is three Claude Code skills that share one private fact file about you. One tailors your CV and cover letter to a posting, one keeps your LinkedIn profile and posts consistent, one builds your portfolio and project sites. Each one stops and asks when it would have to claim something the file doesn't back up, and reviews its own work before you see it.</p>
+                <p class="lead">cvkit is three Claude Code skills that share one private fact file about you. One tailors your CV and cover letter to a posting, one keeps your LinkedIn profile and posts consistent, one builds your portfolio and project sites. cv-builder and linkedin stop and ask when they would have to claim something your file doesn't back up; portfolio leaves out what the repo doesn't document. Each reviews its own work before you see it.</p>
                 <div class="hero-actions">
                     <a class="btn btn-primary btn-lg" href="#kit">See what's in the kit</a>
                     <a class="btn btn-secondary btn-lg" href="https://github.com/mtejedorg/cvkit" target="_blank" rel="noopener">View the source ↗</a>
                 </div>
                 <div class="hero-stats">
                     <div><span class="stat-number">3</span><span class="stat-label">Skills: CVs, LinkedIn, sites</span></div>
-                    <div><span class="stat-number">1</span><span class="stat-label">Fact file, the only source of truth</span></div>
+                    <div><span class="stat-number">1</span><span class="stat-label">Fact file behind your CV and LinkedIn</span></div>
                     <div><span class="stat-number">3</span><span class="stat-label">Reviewer personas included</span></div>
                     <div><span class="stat-number">0</span><span class="stat-label">Personal files in the repo</span></div>
                 </div>
@@ -58,25 +58,25 @@
                 <div class="section-header">
                     <span class="section-tag">The kit</span>
                     <h2 class="section-title">Three skills, one fact file</h2>
-                    <p class="section-lead">Open Claude Code in the repo and say what you need. The skill that matches takes over, reads your profile, and shows you every text a reader will see before anything is written or published.</p>
+                    <p class="section-lead">Open Claude Code in the repo and say what you need. The skill that matches takes over, reads your profile, and shows you the text before anything is sent, pasted or published.</p>
                 </div>
                 <div class="grid">
                     <article class="glass-card card">
-                        <div class="card-icon">CV</div>
+                        <div class="card-icon" aria-hidden="true">CV</div>
                         <h3>cv-builder: build CVs and cover letters</h3>
                         <p>Give it a job posting. It rates the fit, asks about every requirement your profile doesn't back, drafts a CV, cover letter and project portfolio, rewrites them so they don't sound like a template, has a fresh reviewer critique them, then compiles and verifies A4 PDFs, with a public version that has no phone number.</p>
                         <p><a href="#cv-builder">How a CV gets built ↓</a></p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">in</div>
+                        <div class="card-icon" aria-hidden="true">in</div>
                         <h3>linkedin: update your profile and write posts</h3>
                         <p>Compares what is live on your LinkedIn page with your profile and flags anything that overclaims. Writes the headline, About and experience sections within LinkedIn's limits, drafts posts from a project or a repo, replies to recruiters, and recommends your visibility settings.</p>
                         <p><a href="#linkedin">How LinkedIn is handled ↓</a></p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">www</div>
+                        <div class="card-icon" aria-hidden="true">www</div>
                         <h3>portfolio: create your sites</h3>
-                        <p>Builds a portfolio hub at <code>&lt;you&gt;.github.io</code> and a site for each project repo on GitHub Pages, in the style of this page. Each project publishes a small manifest, and the hub turns those into cards. Every sentence comes from the repo's own documents, every image is a real capture.</p>
+                        <p>Builds a portfolio hub at <code>&lt;you&gt;.github.io</code> and a site for each project repo on GitHub Pages, Each project publishes a small manifest, and the hub turns those into cards. Every sentence comes from the repo's own documents, every screenshot is a real capture, and concept art and diagrams are labelled as such.</p>
                         <p><a href="#portfolio">How sites are built ↓</a></p>
                     </article>
                 </div>
@@ -88,36 +88,36 @@
                 <div class="section-header">
                     <span class="section-tag">Design philosophy</span>
                     <h2 class="section-title">Six rules the whole kit is built around</h2>
-                    <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them. All three skills follow them.</p>
+                    <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them. cv-builder follows all six. linkedin applies them to its sections and posts. portfolio applies the ones that fit (no invention, human tone, checked output) to the repo's own documents.</p>
                 </div>
                 <div class="grid grid-5">
                     <article class="glass-card card">
-                        <div class="card-icon">01</div>
+                        <div class="card-icon" aria-hidden="true">01</div>
                         <h3>No hallucination</h3>
                         <p>Every skill, title and number must exist in the candidate profile. If the posting needs something the profile lacks, the skill halts and asks you instead of assuming.</p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">02</div>
+                        <div class="card-icon" aria-hidden="true">02</div>
                         <h3>Humanized, not detector-evasion</h3>
                         <p>A direct rewrite pass removes template-sounding language while keeping every fact identical. No translation chains, no external APIs, no attempt to hide that AI was used.</p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">03</div>
+                        <div class="card-icon" aria-hidden="true">03</div>
                         <h3>Fresh-context review</h3>
                         <p>A second agent with no memory of the drafting critiques the result against the posting, so it catches missed keywords and weak framing the drafter has stopped seeing.</p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">04</div>
+                        <div class="card-icon" aria-hidden="true">04</div>
                         <h3>Verified PDFs</h3>
                         <p>Every PDF is checked for page count, a clean text layer and literal contact details, so an applicant tracking system can actually read it. Then it is inspected by eye. The site skill has its own checks: manifests, a privacy scan and image sizes are verified before anything is published.</p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">05</div>
+                        <div class="card-icon" aria-hidden="true">05</div>
                         <h3>The profile learns</h3>
                         <p>Every answer you give to a clarification question is written back to your profile in your own words. A "no" is kept as a confirmed gap, so it is never claimed later and each application starts from better facts than the last.</p>
                     </article>
                     <article class="glass-card card">
-                        <div class="card-icon">06</div>
+                        <div class="card-icon" aria-hidden="true">06</div>
                         <h3>Lead with proof</h3>
                         <p>The profile ranks your strongest verifiable claims and names a positioning profile per kind of role. Each run picks three proof points for the posting and puts them in the summary, the first bullets and the letter's opening, within a two-page budget.</p>
                     </article>
@@ -129,8 +129,8 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">The shared fact file</span>
-                    <h2 class="section-title">One profile, written once, believed by all three</h2>
-                    <p class="section-lead">The candidate profile is a Markdown file you keep outside this repo. It is the only thing any skill is allowed to believe, and its headings are a contract the skills read.</p>
+                    <h2 class="section-title">One profile, written once, believed by the CV and LinkedIn skills</h2>
+                    <p class="section-lead">The candidate profile is a Markdown file you keep outside this repo. cv-builder and linkedin are allowed to believe nothing else, and its headings are a contract they read. The portfolio skill believes only the project repo's own documents and the software itself.</p>
                 </div>
                 <div class="split">
                     <div class="glass-card card">
@@ -152,7 +152,7 @@
                         </ul>
                     </div>
                 </div>
-                <p class="caption">The profile, your applications log and your generated files live in a workspace folder or private repo. A privacy check scans every tracked file for your own patterns before a commit lands, so the public skill repo never holds a personal file.</p>
+                <p class="caption">The profile, your applications log and your generated files live in a workspace folder or private repo. Once you list your own patterns and enable the pre-commit hook, a commit containing any of them is blocked, so the public skill repo stays free of personal files.</p>
             </div>
         </section>
 
@@ -218,7 +218,7 @@
                         <span class="step-num">7</span>
                         <div class="glass-card step-card">
                             <h3>State update <span class="gate gate-write">Writes your profile</span></h3>
-                            <p>Every answer you gave, from phase 1 or from questions the reviewer or scoring raised later, is saved to the candidate profile in your own words. A "no" goes under Confirmed gaps. Nothing is inferred, and the exact lines added are shown to you. This runs even after short commands like an ATS-only check.</p>
+                            <p>Every answer you gave, from phase 1 or from questions the reviewer or scoring raised later, is saved to the candidate profile in your own words. A "no" goes under Not claimable. Nothing is inferred, and the exact lines added are shown to you. This runs even after short commands like an ATS-only check.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -258,9 +258,8 @@
                     <div class="terminal-bar"><i></i><i></i><i></i><span>&nbsp;phase 7 · state update</span></div>
                     <div class="terminal-body">
                         <p><span class="who">skill ›</span> Saving what you told me to <b>_private/candidate_profile_alex-rivera.md</b>:</p>
-                        <pre class="diff"><span class="ctx">## Confirmed gaps</span><span class="add">+ Kubernetes: confirmed 2026-03-14 (Northwind Labs posting).
-+   "Only Docker and ECS, no Kubernetes."</span></pre>
-                        <p><span class="who">skill ›</span> 1 entry added. Kubernetes is now a confirmed gap, so I won't claim it in any CV. If that changes, tell me and I'll update it.</p>
+                        <pre class="diff"><span class="ctx">## Not claimable</span><span class="add">+ Kubernetes — confirmed 2026-03-14 (Northwind Labs posting) — "Only Docker and ECS, no Kubernetes."</span></pre>
+                        <p><span class="who">skill ›</span> 1 entry added. Kubernetes is now under Not claimable, so I won't claim it in any CV. If that changes, tell me and I'll update it.</p>
                     </div>
                 </div>
                 <p class="caption">Illustrative dialogue and file change written to show the behavior, using a fictional candidate and posting. Only what you state is saved: answers are never inferred or upgraded. The CV it describes is shown <a href="#verify">below</a>.</p>
@@ -296,7 +295,7 @@
                         <li>No fact, number, date or title changed</li>
                     </ul>
                 </div>
-                <div class="note"><strong>Why not a detector-evasion pipeline?</strong> Some humanizer tools push text through chains of machine translation to fool AI-content detectors. That was rejected here: nobody scans a CV for detector signals (a recruiter or a text parser reads it), and every extra translation hop risks drifting a tool name, a metric or a date in a document where each claim must stay true. This skill never tries to hide that AI helped.</div>
+                <div class="note"><strong>Why not a detector-evasion pipeline?</strong> Some humanizer tools push text through chains of machine translation to fool AI-content detectors. That was rejected here: nobody scans a CV for detector signals (a recruiter or a text parser reads it), and every extra translation hop risks drifting a tool name, a metric or a date in a document where each claim must stay true. cvkit never tries to hide that AI helped.</div>
             </div>
         </section>
 
@@ -398,7 +397,7 @@
                         <p>Recommends open-to-work visibility, what contact information to expose and which items to feature, as a checklist for you to click through. Settings change only on an explicit yes, one at a time.</p>
                     </article>
                 </div>
-                <div class="note"><strong>You stay in control of the page.</strong> The skill opens your public profile in the built-in browser and reads it. If LinkedIn asks for a login, you sign in yourself; the skill never types credentials. By default you paste the approved text. Only if you ask it to apply an edit does it fill one section's edit dialog, show you the result and wait for a yes before saving. There is never a bulk save. Without a browser, a LinkedIn data export works as the source.</div>
+                <div class="note"><strong>You stay in control of the page.</strong> The skill opens your public profile in Claude's built-in browser pane (desktop app) and reads it. If LinkedIn asks for a login, you sign in yourself; the skill never types credentials. By default you paste the approved text. Only if you ask it to apply an edit does it fill one section's edit dialog, show you the result and wait for a yes before saving. There is never a bulk save. Without a browser, a LinkedIn data export works as the source.</div>
             </div>
         </section>
 
@@ -453,7 +452,7 @@
                         <p>Reads the shortlist between meetings, wants something shipped and specific, and can tell a real contribution from a team's. Reviews CVs, letters, portfolios, LinkedIn and sites.</p>
                     </article>
                 </div>
-                <p class="caption">Say "create a persona for &lt;role or company type&gt;" and the skill drafts one from your positioning profiles and past postings, into your private folder. Each skill runs the personas that review its kind of output. Findings that several personas share become edits; a finding from one persona is reported to you as a trade-off. Facts never change in this step.</p>
+                <p class="caption">Say "create a persona for &lt;role or company type&gt;" and the skill drafts one from your positioning profiles and past postings, into your private folder. Each skill runs the personas that review its kind of output. Findings that several personas share become edits; a finding from one persona is applied when it costs the others nothing, and reported to you as a trade-off when it does. Facts never change in this step.</p>
             </div>
         </section>
 
@@ -466,11 +465,11 @@
                 </div>
                 <ol class="run">
                     <li class="glass-card"><strong>Fork or clone the repo</strong> and install the dependencies: Python 3.10+, <code>pip install PyMuPDF markdown pytest Pillow</code>, and Microsoft Edge for headless PDF rendering.</li>
-                    <li class="glass-card"><strong>Choose where your private data lives.</strong> Either inside the clone (<code>_private/</code> and <code>_generated/</code> are gitignored), or in a separate private folder or repo that a gitignored <code>cvkit.config.json</code> points to. The second keeps the public repo free of any personal file.</li>
-                    <li class="glass-card"><strong>Write your candidate profile</strong> from the template in <code>templates/</code>, as <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: positioning profiles, ranked proof points, skills with a depth level, verified metrics, what you can't claim and your preferences. This file is the only thing the skills are allowed to believe.</li>
-                    <li class="glass-card"><strong>Turn on the privacy check.</strong> List your email, phone spellings and private file names in <code>_private/privacy_patterns.txt</code>, then enable the pre-commit hook once with <code>git config core.hooksPath .githooks</code>.</li>
-                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", "Audit my LinkedIn profile against my profile", or "Make a project page for this repo". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice.</li>
-                    <li class="glass-card"><strong>Collect the results</strong> in <code>_generated/&lt;Company&gt;/</code> for applications, <code>_generated/LinkedIn/</code> for profile text and posts, and in the repo's site folder for sites.</li>
+                    <li class="glass-card"><strong>Choose where your private data lives.</strong> Either inside the clone (<code>_private/</code> and <code>_generated/</code> are gitignored), or in a separate private folder or repo that a gitignored <code>cvkit.config.json</code> (copy <code>cvkit.config.example.json</code>) points to, or that the <code>CV_WORKSPACE</code> variable names. The second keeps the public repo free of any personal file.</li>
+                    <li class="glass-card"><strong>Write your candidate profile</strong> from the template in <code>templates/</code>, as <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: positioning profiles, ranked proof points, skills with a depth level, verified metrics, what you can't claim and your preferences. cv-builder and linkedin believe nothing else.</li>
+                    <li class="glass-card"><strong>Turn on the privacy check.</strong> List your email, phone spellings and private file names in <code>_private/privacy_patterns.txt</code>, then enable the pre-commit hook once with <code>git config core.hooksPath .githooks</code>. Run <code>python -m pytest -q</code> to confirm the toolchain works on your machine.</li>
+                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", or "Audit my LinkedIn profile against my profile". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice.</li>
+                    <li class="glass-card"><strong>Collect the results</strong> in <code>_generated/&lt;Company_Role&gt;/</code> for applications, <code>_generated/LinkedIn/</code> for profile text and posts, and in the repo's site folder for sites.</li>
                 </ol>
             </div>
         </section>
@@ -487,7 +486,7 @@
                         <li><strong>It is only as honest as your profile.</strong> The skills trust the fact file. If the file overstates something, the output will too. Because your answers are written back to it, a wrong answer persists until you correct it, which is why the skill shows you each change.</li>
                         <li><strong>The score and the fit verdict are heuristics.</strong> They catch problems and flag likely screens (location, permit, seniority), but they are not a measurement from any real applicant tracking system. Each application's score and outcome are logged so you can check whether they predicted anything.</li>
                         <li><strong>Humanizing is not concealment.</strong> It exists so the text reads like a person wrote it, not to disguise AI involvement.</li>
-                        <li><strong>It doesn't post or publish for you.</strong> LinkedIn has no write API for a personal profile, so you paste the text (or approve one edit at a time in the browser). The site skill never creates a repo, pushes or enables Pages; you do those steps.</li>
+                        <li><strong>It never posts or publishes on its own.</strong> LinkedIn has no write API for a personal profile, so you paste the text, or approve one edit at a time in the browser if you ask for that. The site skill commits to your hub checkout but never creates a repo, pushes or enables Pages; you do those steps.</li>
                         <li><strong>Tested on Windows.</strong> PDF rendering needs Microsoft Edge. The script looks for it at standard macOS and Linux paths too, but that is untested.</li>
                         <li><strong>No guarantees.</strong> A well-tailored, truthful CV helps. It does not get you an interview on its own.</li>
                     </ul>
@@ -499,7 +498,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>Built by <a href="https://mtejedorg.github.io/">Marco Tejedor González</a> with Claude Code. Adapted from the open-source <a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">ai-job-search</a> by Mads Lorentzen, whose drafter/reviewer and PDF-verification ideas this builds on.</p>
+            <p>Built by <a href="https://mtejedorg.github.io/">Marco Tejedor González</a> with Claude Code. cv-builder is adapted from the open-source <a href="https://github.com/MadsLorentzen/ai-job-search" target="_blank" rel="noopener">ai-job-search</a> by Mads Lorentzen, whose drafter/reviewer and PDF-verification ideas it builds on.</p>
             <p>Alex Rivera, Example Payments Inc., Sample Logistics Co. and Northwind Labs are fictional.</p>
         </div>
     </footer>

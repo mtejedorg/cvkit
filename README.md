@@ -10,7 +10,7 @@ Career tooling as Claude Code skills, built around one private fact file and one
 
 Shared by all three: the candidate profile schema with skill depth levels, the humanization checklist, a privacy check that blocks commits containing your contact details, and `--public` builds that drop the phone number from anything that goes online.
 
-Setup and the workflows are in [CLAUDE.md](CLAUDE.md). The explainer site for cv-builder is in [`site/`](site/).
+Setup and the workflows are in [CLAUDE.md](CLAUDE.md). The explainer site for the whole kit is in [`site/`](site/).
 
 ```bash
 pip install PyMuPDF markdown pytest Pillow
