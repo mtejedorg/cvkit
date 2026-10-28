@@ -44,7 +44,7 @@ The scripts find the workspace themselves (see Phase 0), so they run from any di
 | [03-pdf-compilation-and-verification.md](03-pdf-compilation-and-verification.md) | A4 compilation, the public variant, verification commands, the ATS rubric |
 | [04-drafter-reviewer-workflow.md](04-drafter-reviewer-workflow.md) | The fresh-context reviewer subagent |
 | [05-profile-schema.md](05-profile-schema.md) | Profile sections, skill depth levels, what counts as a gap |
-| [06-persona-review.md](06-persona-review.md) | Reviewer personas: file format, where they live (generic in `templates/personas/`, yours in the private workspace), which join a CV panel versus a public-page panel, how the panel runs, how to create one |
+| [06-persona-review.md](06-persona-review.md) | Reviewer personas: file format, where they live (generic in `<cvkit>/templates/personas/`, yours in the private workspace), which join a CV panel versus a public-page panel, how the panel runs, how to create one |
 
 ## Workflow
 

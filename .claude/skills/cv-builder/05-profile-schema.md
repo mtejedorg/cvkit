@@ -2,7 +2,7 @@
 
 The profile is the only thing the skill is allowed to believe. This file defines its shape so that every phase can find what it needs by section name, and so that "can I claim X?" is answered by the profile itself instead of by a guess.
 
-A blank, commented copy lives at [`templates/candidate_profile_template.md`](../../../templates/candidate_profile_template.md). Copy it to `<workspace>/_private/candidate_profile_<your-name>.md`.
+A blank, commented copy lives at `<cvkit>/templates/candidate_profile_template.md` (`<cvkit>` is defined in `SKILL.md`). Copy it to `<workspace>/_private/candidate_profile_<your-name>.md`.
 
 ## Sections (the headings are a contract)
 

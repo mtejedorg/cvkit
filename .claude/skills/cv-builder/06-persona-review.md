@@ -8,7 +8,7 @@ Personas are files, not a skill. All three skills (cv-builder, portfolio, linked
 
 | Location | Scope | Who writes them |
 |---|---|---|
-| `templates/personas/` in cvkit | Generic readers every candidate meets: the recruiter screener, the applicant tracking parser, the hiring manager with no domain stated. Fictional, safe to publish. | The repo. Copy, do not edit in place. |
+| `<cvkit>/templates/personas/` | Generic readers every candidate meets: the recruiter screener, the applicant tracking parser, the hiring manager with no domain stated. Fictional, safe to publish. | The repo. Copy, do not edit in place. |
 | `<workspace>/_private/personas/` | Readers specific to the role families the user targets: the people who would actually hire them. They encode what the user wants, so they stay private, like the profile. | The user, with the `create persona` command below. |
 
 Both folders are read on every panel. A private persona with the same `slug` as a generic one replaces it.
@@ -45,7 +45,7 @@ What they over- or under-weight, so the panel can discount it. "Discounts XR exp
 
 ## Which personas join a panel
 
-- **cv-builder (Phase 4):** the generic screener and parser always; private personas whose `families` include the positioning profile chosen in Phase 1 and whose `reviews` include the artifact; if `seniority` is set, it must include the posting's band. Cap at four. A CV for one posting has one reader in mind, so a persona from another family only adds noise.
+- **cv-builder (Phase 4):** the generic screener and parser always; private personas whose `families` include the positioning profile chosen in Phase 1 and whose `reviews` include the artifact; if `seniority` is set, it must include the posting's band; the generic hiring manager joins when no private persona matches. Cap at four. A CV for one posting has one reader in mind, so a persona from another family only adds noise.
 - **portfolio (`check`, and `sync` before the final report) and linkedin (`audit`, `sync`, `post`):** every persona whose `reviews` lists the artifact, generic and private. These artifacts face everyone at once, so the panel must include everyone the user wants to reach.
 
 ## How the panel runs

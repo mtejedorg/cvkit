@@ -53,7 +53,7 @@ If the browser pane is unavailable, fall back to a LinkedIn data export (Setting
 
 ## Workflow for `sync` and `post`
 
-1. Resolve the workspace (same order as cv-builder: `CV_WORKSPACE`, `cvkit.config.json`, repo). Read the profile in full and `live.md` if present.
+1. Resolve the workspace (same order as cv-builder: `CV_WORKSPACE`, `cvkit.config.json` in the root of `<cvkit>`, `<cvkit>` itself). Read the profile in full and `live.md` if present.
 2. Draft. Keep each section under its limit with a safety margin of about five percent; the editor counts differently from a text file.
 3. Humanization pass, style only.
 4. Truth gate: every sentence traceable to the profile (or, for a post, to the named source). A claim without a source is a question for the user, asked in one `AskUserQuestion`, and the answer is written back to the profile the way cv-builder's Phase 7 does.

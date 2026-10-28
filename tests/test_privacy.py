@@ -41,7 +41,7 @@ def _git(repo: Path, *args: str) -> None:
     import subprocess
 
     subprocess.run(
-        ["git", "-c", "user.name=Alex", "-c", "user.email=alex@users.noreply.example.com", *args],
+        ["git", "-c", "user.name=Alex", "-c", "user.email=alex@users.noreply.example.com", "-c", "commit.gpgsign=false", *args],
         cwd=repo, check=True, capture_output=True,
     )
 
@@ -71,7 +71,7 @@ def test_history_checks_author_and_message(tmp_path: Path):
     (tmp_path / "a.txt").write_text("clean\n", encoding="utf-8")
     _git(tmp_path, "add", ".")
     subprocess.run(
-        ["git", "-c", "user.name=Alex", "-c", "user.email=alex.rivera@example.com", "commit", "-q", "-m", "ship it"],
+        ["git", "-c", "user.name=Alex", "-c", "user.email=alex.rivera@example.com", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "ship it"],
         cwd=tmp_path, check=True, capture_output=True,
     )
     hits, addresses = scan_history(tmp_path, ["alex.rivera@example.com"])

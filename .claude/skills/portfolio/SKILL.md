@@ -25,6 +25,8 @@ The helper script ships with this skill; the privacy scan, the generic personas 
 | Generic personas | `<cvkit>/templates/personas/` |
 | Persona panel rules, banned phrases | `<cvkit>/.claude/skills/cv-builder/06-persona-review.md`, `02-humanization-checklist.md` |
 
+`<workspace>` (the user's private folder, used for the privacy patterns and the personas) resolves as in cv-builder: the `CV_WORKSPACE` environment variable, else `cvkit.config.json` in the root of `<cvkit>`, else `<cvkit>` itself.
+
 **Running it against another repo.** The skill is not tied to the cvkit folder. Copy `<cvkit>/.claude/skills/portfolio` to `~/.claude/skills/portfolio` to have it in every repo, or into that repo's `.claude/skills/` for one, then open Claude Code in the repo that needs the page.
 
 ## Detect the role first

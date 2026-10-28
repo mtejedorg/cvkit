@@ -113,7 +113,7 @@ def scan_history(repo: Path, patterns: Sequence[str], all_refs: bool = False) ->
         for pattern in sorted({p for p, _ in scan_text(NL.join(fields), patterns)}):
             hits.append(HistoryHit(sha[:10], "metadata", pattern))
 
-    patches = _git_log(repo, rev, "%x1e%H", "-p", "--no-color")
+    patches = _git_log(repo, rev, "%x1e%H", "-p", "-U0", "-m", "--no-color")
     for record in patches.split(RECORD):
         if not record.strip():
             continue
