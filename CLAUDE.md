@@ -81,7 +81,7 @@ cvkit/
 
 ```bash
 python compile_all_pdfs.py "<Folder>"                 # all .md in <workspace>/_generated/<Folder>/
-python compile_all_pdfs.py "<Folder>" --public        # adds *_public.pdf without the phone number
+python compile_all_pdfs.py "<Folder>" --public        # writes only the *_public.pdf files, without the phone number
 python verify_pdf.py "<pdf>" --max-pages 2 --contains "<name>" --contains "<email>" \
   --order "Professional Summary" --order "Professional Experience" --order "Core Competencies" --order "Education"
 python verify_pdf.py "<pdf>_public.pdf" --forbids "<phone digits>"
