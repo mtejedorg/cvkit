@@ -94,6 +94,7 @@ code { font-family: var(--font-mono); font-size: 0.88em; background: rgba(255, 2
 .card { padding: 1.7rem; }
 .card h3 { font-size: 1.15rem; margin-bottom: 0.55rem; }
 .card p { color: var(--text-secondary); font-size: 0.94rem; }
+.card p + p { margin-top: 0.8rem; }
 .card-icon { width: 46px; height: 46px; border-radius: var(--radius-md); background: rgba(0, 242, 254, 0.1); color: var(--accent-cyan); display: grid; place-items: center; margin-bottom: 1.1rem; font-family: var(--font-mono); font-weight: 700; }
 
 /* Pipeline */
