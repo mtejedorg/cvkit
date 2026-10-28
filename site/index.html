@@ -59,7 +59,7 @@
                 <div class="section-header">
                     <span class="section-tag">The kit</span>
                     <h2 class="section-title">Three skills, one rule</h2>
-                    <p class="section-lead">Open Claude Code in the repo and say what you need. The skill that matches takes over, reads your profile, and shows you the text before anything is sent, pasted or published.</p>
+                    <p class="section-lead">Open Claude Code in the repo and say what you need. The skill that matches takes over, reads its source (your profile, or the project repo), and shows you the text before anything is sent, pasted or published.</p>
                 </div>
                 <div class="grid">
                     <article class="glass-card card">
@@ -77,7 +77,7 @@
                     <article class="glass-card card">
                         <div class="card-icon" aria-hidden="true">www</div>
                         <h3>portfolio: create your sites</h3>
-                        <p>Builds a portfolio hub at <code>&lt;you&gt;.github.io</code> and a site for each project repo on GitHub Pages, Each project publishes a small manifest, and the hub turns those into cards. Every sentence comes from the repo's own documents, every screenshot is a real capture, and concept art and diagrams are labelled as such.</p>
+                        <p>Builds a portfolio hub at <code>&lt;you&gt;.github.io</code> and a site for each project repo on GitHub Pages. Each project publishes a small manifest, and the hub turns those into cards. Every sentence comes from the repo's own documents, every screenshot is a real capture, and concept art and diagrams are labelled as such.</p>
                         <p><a href="#portfolio">How sites are built ↓</a></p>
                     </article>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="section-header">
                     <span class="section-tag">Design philosophy</span>
                     <h2 class="section-title">Six rules the whole kit is built around</h2>
-                    <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them. cv-builder follows all six. linkedin applies them to its sections and posts. portfolio applies the ones that fit (no invention, human tone, checked output) to the repo's own documents.</p>
+                    <p class="section-lead">AI-written applications tend to fail in two ways: they invent things, and they sound like every other AI-written application. Each rule below targets one of those failures, or the checks that catch them. cv-builder follows all six. linkedin applies all but the PDF checks to its sections and posts. portfolio applies the ones that fit (no invention, human tone, checked output) to the repo's own documents.</p>
                 </div>
                 <div class="grid grid-5">
                     <article class="glass-card card">
@@ -100,7 +100,7 @@
                     <article class="glass-card card">
                         <div class="card-icon" aria-hidden="true">02</div>
                         <h3>Humanized, not detector-evasion</h3>
-                        <p>A direct rewrite pass removes template-sounding language while keeping every fact identical. No translation chains, no external APIs, no attempt to hide that AI was used.</p>
+                        <p>A direct rewrite pass removes template-sounding language while keeping every fact identical. No translation chains, no attempt to hide that AI was used.</p>
                     </article>
                     <article class="glass-card card">
                         <div class="card-icon" aria-hidden="true">03</div>
@@ -131,7 +131,7 @@
                 <div class="section-header">
                     <span class="section-tag">The shared fact file</span>
                     <h2 class="section-title">One profile, written once, believed by the CV and LinkedIn skills</h2>
-                    <p class="section-lead">The candidate profile is a Markdown file you keep outside this repo. cv-builder and linkedin are allowed to believe nothing else, and its headings are a contract they read. The portfolio skill believes only the project repo's own documents and the software itself.</p>
+                    <p class="section-lead">The candidate profile is a Markdown file kept in your private workspace (a separate folder, or the clone's gitignored <code>_private/</code>). cv-builder and linkedin believe nothing else about you, though a LinkedIn post may also cite the source you name, and the profile's headings are a contract they read. The portfolio skill believes only the project repo's own documents and the software itself.</p>
                 </div>
                 <div class="split">
                     <div class="glass-card card">
@@ -219,7 +219,7 @@
                         <span class="step-num">7</span>
                         <div class="glass-card step-card">
                             <h3>State update <span class="gate gate-write">Writes your profile</span></h3>
-                            <p>Every answer you gave, from phase 1 or from questions the reviewer or scoring raised later, is saved to the candidate profile in your own words. A "no" goes under Not claimable. Nothing is inferred, and the exact lines added are shown to you. This runs even after short commands like an ATS-only check.</p>
+                            <p>Every answer you gave, from phase 1 or from questions the reviewer or scoring raised later, is saved to the candidate profile in your own words. A "no" goes under Not claimable. Nothing is inferred, and the exact lines added are shown to you. This runs even after a score-only check, if it asked you something.</p>
                         </div>
                     </li>
                     <li class="step">
@@ -227,6 +227,13 @@
                         <div class="glass-card step-card">
                             <h3>Interview prep <span class="gate gate-opt">Optional</span></h3>
                             <p>On request, a STAR-method prep pass based on the posting and the final documents.</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span class="step-num">9</span>
+                        <div class="glass-card step-card">
+                            <h3>Outcomes <span class="gate gate-opt">On request</span></h3>
+                            <p>Updates which applications were sent and how they ended, then checks the score and the fit verdict against what happened.</p>
                         </div>
                     </li>
                 </ol>
@@ -322,7 +329,7 @@
                             <li>Keywords the profile supports but the draft missed</li>
                             <li>True claims stated too vaguely</li>
                             <li>Language that still reads as templated</li>
-                            <li>The same metric phrased two different ways across documents</li>
+                            <li>The same fact phrased two different ways across documents</li>
                         </ul>
                     </div>
                 </div>
@@ -423,7 +430,7 @@
                         <h3>Three rules</h3>
                         <ul>
                             <li><strong>Only real facts and real images.</strong> Screenshots are captures of the real thing, concept art is labelled concept art, and a fact the repo doesn't document is left out</li>
-                            <li><strong>Nothing personal leaks.</strong> No phone numbers anywhere, and any email is assembled by script so scrapers don't read it</li>
+                            <li><strong>Nothing personal leaks.</strong> No phone numbers anywhere, and any email is assembled by JavaScript so it never appears as plain text in the HTML</li>
                             <li><strong>Nothing is hardcoded.</strong> Owner and repo come from the git remote, so a fork works with no edits</li>
                         </ul>
                     </div>
@@ -467,9 +474,9 @@
                 <ol class="run">
                     <li class="glass-card"><strong>Fork or clone the repo</strong> and install the dependencies: Python 3.10+, <code>pip install PyMuPDF markdown pytest Pillow</code>, and Microsoft Edge for headless PDF rendering.</li>
                     <li class="glass-card"><strong>Choose where your private data lives.</strong> Either inside the clone (<code>_private/</code> and <code>_generated/</code> are gitignored), or in a separate private folder or repo that a gitignored <code>cvkit.config.json</code> (copy <code>cvkit.config.example.json</code>) points to, or that the <code>CV_WORKSPACE</code> variable names. The second keeps the public repo free of any personal file.</li>
-                    <li class="glass-card"><strong>Write your candidate profile</strong> from the template in <code>templates/</code>, as <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: positioning profiles, ranked proof points, skills with a depth level, verified metrics, what you can't claim and your preferences. cv-builder and linkedin believe nothing else.</li>
+                    <li class="glass-card"><strong>Write your candidate profile</strong> from the template in <code>templates/</code>, as <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: positioning profiles, ranked proof points, skills with a depth level, verified metrics, what you can't claim and your preferences. cv-builder and linkedin believe nothing else about you.</li>
                     <li class="glass-card"><strong>Turn on the privacy check.</strong> List your email, phone spellings and private file names in <code>_private/privacy_patterns.txt</code>, then enable the pre-commit hook once with <code>git config core.hooksPath .githooks</code>. Run <code>python -m pytest -q</code> to confirm the toolchain works on your machine.</li>
-                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", or "Audit my LinkedIn profile against my profile". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice. To build a project page for another repo, copy <code>.claude/skills/portfolio</code> to <code>~/.claude/skills/</code> (every repo) or into that repo's <code>.claude/skills/</code>, open Claude Code there and say "Make a project page for this repo".</li>
+                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", or "Audit my LinkedIn profile against my profile". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice. To build a project page for another repo, copy <code>.claude/skills/portfolio</code> to <code>~/.claude/skills/</code> or into that repo's <code>.claude/skills/</code>, keep this clone and set <code>CVKIT_HOME</code> to it, open Claude Code in that repo and say "Make a project page for this repo".</li>
                     <li class="glass-card"><strong>Collect the results</strong> in <code>_generated/&lt;Company_Role&gt;/</code> for applications, <code>_generated/LinkedIn/</code> for profile text and posts, and in the repo's site folder for sites.</li>
                 </ol>
             </div>
