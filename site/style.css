@@ -61,6 +61,8 @@ code { font-family: var(--font-mono); font-size: 0.88em; background: rgba(255, 2
 .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
 .btn-lg { padding: 0.85rem 1.6rem; font-size: 1rem; }
 :focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 3px; }
+.skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 60; padding: 0.5rem 0.9rem; background: var(--bg-dark); color: var(--text-primary); border: 2px solid var(--accent-cyan); border-radius: 6px; text-decoration: none; font-weight: 600; }
+.skip-link:focus { top: 0.75rem; }
 
 /* Nav */
 .navbar { position: sticky; top: 0; z-index: 50; background: rgba(7, 9, 14, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-subtle); }

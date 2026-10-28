@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cvkit | Career tooling for Claude Code that is not allowed to lie</title>
-    <meta name="description" content="cvkit is a set of open-source Claude Code skills that share one private fact file: cv-builder tailors CVs and cover letters, linkedin keeps your profile and posts true, portfolio builds your project and portfolio sites on GitHub Pages. Nothing is claimed that the fact file does not back.">
+    <meta name="description" content="cvkit is a set of open-source Claude Code skills with one rule: nothing is claimed that their sources don't back. cv-builder tailors CVs and cover letters, linkedin keeps your profile and posts true, portfolio builds your project and portfolio sites on GitHub Pages.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="cvkit | Career tooling for Claude Code that is not allowed to lie">
-    <meta property="og:description" content="Three open-source Claude Code skills, one fact file: tailored CVs, a truthful LinkedIn presence and portfolio sites, each reviewed before you see it.">
+    <meta property="og:description" content="Three open-source Claude Code skills, one rule: nothing claimed without a source. Tailored CVs, a truthful LinkedIn presence and portfolio sites, each reviewed before you see it.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090e'/%3E%3Cpath d='M24 20 12 32l12 12M40 20l12 12-12 12' fill='none' stroke='%2300f2fe' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <a class="skip-link" href="#top">Skip to content</a>
 
     <header class="navbar">
         <div class="nav-container">
@@ -39,7 +40,7 @@
             <div class="container hero-inner">
                 <span class="badge">Open-source Claude Code skills</span>
                 <h1>Career tooling that is <span class="text-gradient">not allowed to lie.</span></h1>
-                <p class="lead">cvkit is three Claude Code skills that share one private fact file about you. One tailors your CV and cover letter to a posting, one keeps your LinkedIn profile and posts consistent, one builds your portfolio and project sites. cv-builder and linkedin stop and ask when they would have to claim something your file doesn't back up; portfolio leaves out what the repo doesn't document. Each reviews its own work before you see it.</p>
+                <p class="lead">cvkit is three Claude Code skills with one rule: nothing is claimed that its source doesn't back. One tailors your CV and cover letter to a posting, one keeps your LinkedIn profile and posts consistent, one builds your portfolio and project sites. cv-builder and linkedin work from one private fact file about you and stop and ask when they would have to claim something it doesn't back up; portfolio works from the repo's own documents and leaves out what they don't cover. Each reviews its own work before you see it.</p>
                 <div class="hero-actions">
                     <a class="btn btn-primary btn-lg" href="#kit">See what's in the kit</a>
                     <a class="btn btn-secondary btn-lg" href="https://github.com/mtejedorg/cvkit" target="_blank" rel="noopener">View the source ↗</a>
@@ -57,7 +58,7 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">The kit</span>
-                    <h2 class="section-title">Three skills, one fact file</h2>
+                    <h2 class="section-title">Three skills, one rule</h2>
                     <p class="section-lead">Open Claude Code in the repo and say what you need. The skill that matches takes over, reads your profile, and shows you the text before anything is sent, pasted or published.</p>
                 </div>
                 <div class="grid">
@@ -468,7 +469,7 @@
                     <li class="glass-card"><strong>Choose where your private data lives.</strong> Either inside the clone (<code>_private/</code> and <code>_generated/</code> are gitignored), or in a separate private folder or repo that a gitignored <code>cvkit.config.json</code> (copy <code>cvkit.config.example.json</code>) points to, or that the <code>CV_WORKSPACE</code> variable names. The second keeps the public repo free of any personal file.</li>
                     <li class="glass-card"><strong>Write your candidate profile</strong> from the template in <code>templates/</code>, as <code>_private/candidate_profile_&lt;your-name&gt;.md</code>: positioning profiles, ranked proof points, skills with a depth level, verified metrics, what you can't claim and your preferences. cv-builder and linkedin believe nothing else.</li>
                     <li class="glass-card"><strong>Turn on the privacy check.</strong> List your email, phone spellings and private file names in <code>_private/privacy_patterns.txt</code>, then enable the pre-commit hook once with <code>git config core.hooksPath .githooks</code>. Run <code>python -m pytest -q</code> to confirm the toolchain works on your machine.</li>
-                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", or "Audit my LinkedIn profile against my profile". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice.</li>
+                    <li class="glass-card"><strong>Open Claude Code in the folder and ask.</strong> For example: "Tailor my CV for &lt;posting URL or pasted text&gt;", or "Audit my LinkedIn profile against my profile". Answer the questions about gaps; the skill won't draft until you do, and it saves your answers so it doesn't ask twice. To build a project page for another repo, copy <code>.claude/skills/portfolio</code> to <code>~/.claude/skills/</code> (every repo) or into that repo's <code>.claude/skills/</code>, open Claude Code there and say "Make a project page for this repo".</li>
                     <li class="glass-card"><strong>Collect the results</strong> in <code>_generated/&lt;Company_Role&gt;/</code> for applications, <code>_generated/LinkedIn/</code> for profile text and posts, and in the repo's site folder for sites.</li>
                 </ol>
             </div>

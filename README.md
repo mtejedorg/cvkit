@@ -1,6 +1,6 @@
 # cvkit
 
-Career tooling as Claude Code skills, built around one private fact file and one rule: nothing gets claimed that the file does not back.
+Career tooling as Claude Code skills with one rule: nothing is claimed that its source does not back. cv-builder and linkedin share one private fact file about you; portfolio reads the project repo's own documents.
 
 | Skill | What it does |
 |---|---|
