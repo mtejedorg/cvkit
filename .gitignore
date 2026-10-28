@@ -1,6 +1,6 @@
 # Private & generated folders (candidate profile, personal data, generated PDFs)
-_private/
-_generated/
+/_private/
+/_generated/
 
 # Claude Code / harness runtime state
 .claude/scheduled_tasks.lock
@@ -11,4 +11,4 @@ __pycache__/
 *.pyc
 
 # Local workspace pointer (points at your private career folder)
-cvkit.config.json
+/cvkit.config.json
