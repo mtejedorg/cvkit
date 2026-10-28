@@ -1,6 +1,6 @@
 # cvkit — career tooling skills
 
-Three Claude Code skills that share one private fact file and one rule: nothing is claimed that the file does not back. Fork it, write your profile, point the skills at a posting, a repo or your LinkedIn page.
+Three Claude Code skills with one rule: nothing is claimed that its source does not back. cv-builder and linkedin share one private fact file about you; portfolio reads the project repo's own documents. Fork it, write your profile, point the skills at a posting, a repo or your LinkedIn page.
 
 ## Skills and entry points
 
@@ -111,6 +111,7 @@ Each skill has test cases under `evals/<case>/` (a prompt, an expected outcome, 
 
 - Commit the skill, toolchain, templates, tests, examples and site freely. Never commit anything from your workspace.
 - `privacy_check.py` runs as the pre-commit hook. Keep your patterns file current.
+- Before every push or publish run `python privacy_check.py --history`: it scans every commit reachable from `HEAD` (diffs, messages, author and committer) and prints the identities it saw, which should all be your noreply address. `--all-refs` also covers other branches and tags.
 - Fictional examples only (the repo's sample candidate is Alex Rivera at fictional companies). Never use real application folders as examples.
 
 ## Dependencies
