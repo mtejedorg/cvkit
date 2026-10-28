@@ -22,7 +22,7 @@ Three Claude Code skills with one rule: nothing is claimed that its source does 
 
 2. **Choose where your private data lives.** Two options:
    - *Simple:* keep it inside this folder. `_private/` and `_generated/` are gitignored.
-   - *Recommended:* a separate private folder or private repo (e.g. `../career-personal/`), so the public skill repo never holds a single personal file. Copy `cvkit.config.example.json` to `cvkit.config.json` (gitignored) and set `workspace` to that folder, or export `CV_WORKSPACE`. The scripts and the skill resolve the workspace in that order: `CV_WORKSPACE`, config file, this repo.
+   - *Recommended:* a separate private folder or private repo (e.g. `../my-career-data/`), so the public skill repo never holds a single personal file. Copy `cvkit.config.example.json` to `cvkit.config.json` (gitignored) and set `workspace` to that folder, or export `CV_WORKSPACE`. The scripts and the skill resolve the workspace in that order: `CV_WORKSPACE`, config file, this repo.
 
 3. **Write your candidate profile.** Copy `templates/candidate_profile_template.md` to `<workspace>/_private/candidate_profile_<your-name>.md` and fill it in. The headings are a contract with the skill; [05-profile-schema.md](.claude/skills/cv-builder/05-profile-schema.md) explains each section. The parts that matter most:
    - **Positioning profiles**: one per kind of role you apply to, each with a 50–70 word summary and three leading proof points.
