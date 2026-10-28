@@ -24,7 +24,7 @@ Sources, in this order: `README.md`, then anything under `docs/` that reads as a
 ## `check`
 
 ```bash
-python .claude/skills/portfolio/scripts/portfolio_tool.py validate docs/site/portfolio.json
+python <skill>/scripts/portfolio_tool.py validate docs/site/portfolio.json
 python <cvkit>/privacy_check.py --paths docs/site        # if a patterns file exists
 grep -riE "proven|cutting-edge|seamless|pioneering|high-performance|passionate|world-class|state-of-the-art" docs/site/*.html
 ```

@@ -14,6 +14,18 @@ LinkedIn has no write API for a personal profile, so this skill produces **paste
 
 Limits, section rules and post patterns are in [references/sections.md](references/sections.md) and [references/posts.md](references/posts.md). Read the one you need.
 
+## Requires the cvkit repo
+
+This skill is text only, but it reads files that live in the cvkit repo. `<cvkit>` below is the root of a clone of `https://github.com/mtejedorg/cvkit` (or a fork). Locate it at the start of every run: the current directory if it holds `privacy_check.py` and `cvtool/`, else the folder the `CVKIT_HOME` environment variable names, else ask the user (offer `git clone`, and wait for a yes).
+
+| What | Path |
+|---|---|
+| Profile schema, depth levels | `<cvkit>/.claude/skills/cv-builder/05-profile-schema.md` |
+| Humanization checklist | `<cvkit>/.claude/skills/cv-builder/02-humanization-checklist.md` |
+| Persona panel rules | `<cvkit>/.claude/skills/cv-builder/06-persona-review.md` |
+| Generic personas | `<cvkit>/templates/personas/` |
+| Privacy scan | `python <cvkit>/privacy_check.py` |
+
 ## Reading and editing the live profile
 
 LinkedIn has no personal-profile API, so the skill works through a browser, and the user never copies text by hand:
@@ -33,7 +45,7 @@ If the browser pane is unavailable, fall back to a LinkedIn data export (Setting
 
 ## Commands
 
-- **audit**: compare `live.md` with the profile. Flag any live claim the profile does not back, numbers not in `verified metrics`, banned phrases, sections over limit, and missing proof points. Then run the **persona panel** with every persona whose `reviews` lists `linkedin` (generic ones in cvkit `templates/personas/`, the user's in `<workspace>/_private/personas/`), per the cv-builder skill's `06-persona-review.md`: a LinkedIn profile is read by every kind of reader, so all of them join. Output a table: section, finding, persona(s), fix. Nothing is rewritten yet.
+- **audit**: compare `live.md` with the profile. Flag any live claim the profile does not back, numbers not in `verified metrics`, banned phrases, sections over limit, and missing proof points. Then run the **persona panel** with every persona whose `reviews` lists `linkedin` (generic ones in `<cvkit>/templates/personas/`, the user's in `<workspace>/_private/personas/`), per the cv-builder skill's `06-persona-review.md`: a LinkedIn profile is read by every kind of reader, so all of them join. Output a table: section, finding, persona(s), fix. Nothing is rewritten yet.
 - **sync**: rewrite the sections that `audit` flagged (or all, on request) within limits, from the chosen positioning profile. Each section goes to its own file with a character count line at the top. `CHANGES.md` lists old and new per section. Ask before touching a section the user wrote in a voice they like; the profile owner's phrasing beats the skill's.
 - **post**: draft a post from a source the user names: a project manifest (`portfolio.json`), a repo README, a CV folder, an event. Three variants with different hooks, each with its character count, a suggested real image (a capture, never generated), and the facts it relies on with their source. See `references/posts.md`.
 - **message**: a reply to a recruiter, a connection note, a follow-up after applying, or a thank-you after an interview. Short, specific, one ask. The connection note respects the 300-character cap. Never includes the phone number unless the user says to.

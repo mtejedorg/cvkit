@@ -10,7 +10,7 @@ The hub is the personal site at `https://<owner>.github.io/`. Its source may liv
 
 ## `sync`
 
-1. `python .claude/skills/portfolio/scripts/portfolio_tool.py discover --local-root <parent of the sibling repos>` prints every manifest it found, with its source (local path or URL), and every validation error. Fix nothing in the projects from here; report errors and skip those projects.
+1. `python <skill>/scripts/portfolio_tool.py discover --local-root <parent of the sibling repos>` prints every manifest it found, with its source (local path or URL), and every validation error. Fix nothing in the projects from here; report errors and skip those projects.
 2. For each valid manifest:
    - `portfolio_tool.py preview <manifest preview path or URL> assets/<slug>_preview.jpg` (re-encoded, 1200×675).
    - Update the card with that `data-slug`: image `src` and `alt`, title, blurb, up to five tags, a "Site →" link to `site` only if the URL answers 200, and a "GitHub ↗" link to `repo`. Create the card from the hub's existing card markup if none exists, after the other project cards.
@@ -21,7 +21,7 @@ The hub is the personal site at `https://<owner>.github.io/`. Its source may liv
 ## `check`
 
 ```bash
-python <cvkit>/privacy_check.py --patterns <workspace>/_private/privacy_patterns.portfolio.txt --paths <site folder>
+python <cvkit>/privacy_check.py --paths <site folder>
 grep -riE "proven|cutting-edge|seamless|pioneering|high-performance|passionate|world-class" <site folder>/*.html <site folder>/*.js
 ```
 
