@@ -107,7 +107,6 @@
 
 ## Not claimable
 
-- Kubernetes in production — confirmed 2026-03-14 (Northwind Labs posting) — "Only Docker and ECS, no Kubernetes."
 
 ## STAR stories
 
