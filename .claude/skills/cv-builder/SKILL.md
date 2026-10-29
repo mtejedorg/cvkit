@@ -102,7 +102,7 @@ Every answer the user gave in this run goes into the profile, in their words:
 On request: STAR-method prep from `## STAR stories` (say which are still `draft`), the JD and the final documents.
 
 ### Phase 9 — Outcomes (on request, or when a log row is stale)
-Update `sent` and `outcome` for open rows. With a mail connector available, search the mailbox by company and read the reply; otherwise ask the user. Outcome values: `draft`, `sent`, `viewed`, `no-reply` (21+ days), `rejected`, `interview`, `offer`, `withdrawn`; add the date and the reason when the email gives one. Then compare score and fit against outcomes and report what held up and what did not. With fewer than 10 decided rows, say the sample is too small to change the rubric.
+Update `sent` and `outcome` for open rows. With a mail connector available, search the mailbox by company and read the reply; otherwise ask the user. Mail outranks the LinkedIn job tracker (my-items/saved-jobs, Applied tab): some LinkedIn submissions go through third parties and LinkedIn is not updated for them. Where mail has nothing, read the tracker when the user is signed in (read-only; never enter credentials) and use what it shows (applied, viewed, resume downloaded). Always record the most advanced state of an offer, and show the evidence for each row before writing it. Mail dates stamped in UTC are converted to the user's local date. Outcome values: `draft`, `sent`, `viewed`, `no-reply` (21+ days), `rejected`, `interview`, `offer`, `withdrawn`; add the date and the reason when the email gives one. Then compare score and fit against outcomes and report what held up and what did not. With fewer than 10 decided rows, say the sample is too small to change the rubric.
 
 ## Approval model
 
