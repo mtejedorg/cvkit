@@ -1,6 +1,7 @@
 ---
 name: cv-builder
-description: Tailor a CV, cover letter and project portfolio to a specific job posting, using the candidate profile as the only source of truth, then check fit, review, score, compile verified A4 PDFs and record the application. Use this for anything about applying to a job: a posting URL or pasted text, "apply to this", "is this role a fit", a resume or CV rewrite, a cover letter, a generic CV, a phone-less public CV, an ATS or fit score, interview prep for an application, or updating what happened to applications already sent. Trigger even when the user only pastes a job description without asking for anything.
+description: >-
+  Tailor a CV, cover letter and project portfolio to a specific job posting, using the candidate profile as the only source of truth, then check fit, review, score, compile verified A4 PDFs and record the application. Use this for anything about applying to a job: a posting URL or pasted text, "apply to this", "is this role a fit", a resume or CV rewrite, a cover letter, a generic CV, a phone-less public CV, an ATS or fit score, interview prep for an application, or updating what happened to applications already sent. Trigger even when the user only pastes a job description without asking for anything.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Task, AskUserQuestion
 ---
 

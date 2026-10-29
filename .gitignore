@@ -6,6 +6,9 @@
 .claude/scheduled_tasks.lock
 .claude/settings.local.json
 
+# Eval run output (reports, traces)
+.claude/skills/*/evals/results/
+
 # Python
 __pycache__/
 *.pyc

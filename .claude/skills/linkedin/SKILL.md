@@ -1,6 +1,7 @@
 ---
 name: linkedin
-description: Keep a LinkedIn presence consistent with the candidate profile and write LinkedIn text that is true. Use this whenever the user mentions LinkedIn in any form: updating their headline, About, experience entries, skills or featured section; checking that the live profile does not overclaim; writing a LinkedIn post about a project, launch or lesson; replying to a recruiter message; a connection note, follow-up or thank-you; or deciding what open-to-work and contact settings to show. Trigger even when they only say "my profile" or "a post about the game" and the platform is LinkedIn in context.
+description: >-
+  Keep a LinkedIn presence consistent with the candidate profile and write LinkedIn text that is true. Use this whenever the user mentions LinkedIn in any form: updating their headline, About, experience entries, skills or featured section; checking that the live profile does not overclaim; writing a LinkedIn post about a project, launch or lesson; replying to a recruiter message; a connection note, follow-up or thank-you; or deciding what open-to-work and contact settings to show. Trigger even when they only say "my profile" or "a post about the game" and the platform is LinkedIn in context.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
 ---
 
