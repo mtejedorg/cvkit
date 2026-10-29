@@ -12,3 +12,6 @@ __pycache__/
 
 # Local workspace pointer (points at your private career folder)
 /cvkit.config.json
+
+# Personal Claude Code rules for this clone
+/CLAUDE.local.md
