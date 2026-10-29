@@ -50,7 +50,7 @@ What they over- or under-weight, so the panel can discount it. "Discounts XR exp
 
 ## How the panel runs
 
-1. For each persona, a fresh-context reviewer (a subagent with the `Task` tool, default model; sequential passes when subagents are unavailable) receives: the persona file verbatim, the artifact, and for a CV the posting. Nothing else, so it reads the way that person would: without the profile, without the drafting history.
+1. For each persona, a fresh-context reviewer (a subagent with the `Task` tool, default model; sequential passes when subagents are unavailable) receives: the persona file verbatim, the artifact, and for a CV the posting. Nothing else, so it reads the way that person would: without the profile, without the drafting history. The text may be passed inline or as file paths the reviewer reads (a bundle of posting, CV and letter saves retyping them into every prompt); tell it to read only the named files.
 2. It answers in this shape, in the persona's voice, under 250 words:
    - **First impression** (one sentence, after thirty seconds).
    - **Would I keep reading? Why or why not.**

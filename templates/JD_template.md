@@ -1,7 +1,7 @@
 # <Company> — <Role>
 
 - source: <URL, recruiter email, or "pasted by user">
-- channel: <company site | LinkedIn Easy Apply | job board | recruiter | referral | direct email>
+- channel: <company site | LinkedIn Easy Apply | job board | marketplace or agency | recruiter | referral | direct email>
 - seen: <YYYY-MM-DD>
 - location / mode: <city, on-site | hybrid | remote>
 
@@ -23,5 +23,6 @@
 | Domain years | | |
 | Language | | |
 | Mandatory credential or title | | |
+| Engagement type | | |
 
 Verdict: strong / workable / unlikely

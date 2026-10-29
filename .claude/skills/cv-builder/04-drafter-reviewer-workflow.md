@@ -8,7 +8,8 @@ Use the `Task` tool with a general-purpose subagent (default model; no model ove
 
 - The job description, verbatim.
 - The drafted CV, cover letter and project portfolio Markdown, post-humanization.
-- The profile sections this posting drew on: the chosen `### <Family>` positioning profile, the three proof points, the relevant Experience/Project entries and Skills rows. Not the whole file.
+- The profile sections this posting drew on: the chosen `### <Family>` positioning profile, the three proof points, the relevant Experience/Project entries and Skills rows. Not the whole file, but every section a claim in the draft rests on: Education and Languages when the CV lists them, Projects for any project named, and the STAR stories behind an anecdote in the letter. A reviewer given less flags backed claims as unbacked and cannot confirm the true ones.
+- The answers the user gave in this run, in their words, since they are not in the profile yet.
 - The length budget from `01-structure-and-style.md` section B and the banned-phrase list from `02-humanization-checklist.md`.
 - The fit verdict from Phase 1, and the score and uncovered must-haves from Phase 5 if already computed, or ask it to hold off.
 

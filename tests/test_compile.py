@@ -3,6 +3,7 @@ from pathlib import Path
 import fitz
 import pytest
 
+from cvtool import compile as compile_mod
 from cvtool.compile import build_html, compile_markdown, find_edge
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -19,6 +20,15 @@ def _edge_available() -> bool:
 
 
 needs_edge = pytest.mark.skipif(not _edge_available(), reason="Microsoft Edge not installed")
+
+
+def test_compile_folder_skips_the_saved_posting(tmp_path, monkeypatch):
+    (tmp_path / "JD.md").write_text("# Acme: Engineer\n", encoding="utf-8")
+    (tmp_path / "CV.md").write_text("# Alex Rivera\n", encoding="utf-8")
+    seen = []
+    monkeypatch.setattr(compile_mod, "compile_markdown", lambda md, pdf, **kw: seen.append(md.name) or pdf)
+    compile_mod.compile_folder(tmp_path, edge_path="edge")
+    assert seen == ["CV.md"]
 
 
 def test_build_html_uses_a4_page_rule():

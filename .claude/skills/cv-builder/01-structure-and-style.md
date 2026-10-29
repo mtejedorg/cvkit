@@ -81,3 +81,7 @@ Role lines must follow this exact shape so the template can right-align the date
 - Group projects under `## <Title> (<Company>)` headers by role, reverse-chronological across and within sections, with years on every project.
 - First-person, active ("I built…"), 2–3 bullets per project, a short technology line per project, no long tool dumps.
 - Only projects with a `status` in the profile; academic work is labelled academic.
+
+## J. Cover letter content
+
+The letter tells the reader who the candidate is and why that fits this posting; the CV holds the detail. Paragraph 1 names the role and the single strongest proof point; paragraph 2 says what the reader gets (how the candidate works, the skills and conditions the posting asks for, one or two proofs); paragraph 3 covers availability, engagement and a closing line. One anecdote at most, and only as support for a claim about the candidate. A letter made of anecdotes and curiosities, or one that restates the CV summary, reads as templated and tells the reader nothing about the person. For a marketplace or agency posting, say the application is to be vetted or matched.

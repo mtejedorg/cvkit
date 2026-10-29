@@ -16,7 +16,7 @@ python <cvkit>/compile_all_pdfs.py "<Folder>" --public   # only the phone-less *
 python <cvkit>/compile_all_pdfs.py                       # every folder, only stale PDFs
 ```
 
-Never run a blanket rebuild to fix one application; target the folder.
+Never run a blanket rebuild to fix one application; target the folder. A saved `JD.md` is skipped: it holds the fit check, not a document to send.
 
 ## Verification (run every time, before presenting output)
 
@@ -58,6 +58,7 @@ Phase 1, before drafting. It answers "should this application go out, and what w
 | Domain years | years in the technology or domain the title names, counted from Experience and Projects, not from the skills list |
 | Language | language the posting requires against the profile's levels |
 | Mandatory credential or title | anything the posting treats as required (a named discipline, a degree, a licence) |
+| Engagement type | employee, contract or freelance, direct hire, against the profile's stated preference; a marketplace or agency posting has no client yet, so rate what the posting says about how the work is offered |
 
 Verdict: **strong** (all `ok`, at most one `risk`), **workable** (two or more `risk`, no `block`), **unlikely** (any `block`, or three or more `risk`). On `unlikely` the skill states the reasons and asks whether to continue. The verdict is a prediction about the screen, not a verdict on the candidate, and it never changes what the CV may claim.
 

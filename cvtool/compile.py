@@ -119,6 +119,9 @@ def compile_folder(folder: Path, *, force: bool = False, public: bool = False, e
     edge_path = edge_path or find_edge()
     outputs: list[Path] = []
     for md_path in sorted(folder.glob("*.md")):
+        if md_path.name.lower() == "jd.md":
+            # the saved posting carries the fit check; it is a record, not a document to send
+            continue
         suffix = "_public.pdf" if public else ".pdf"
         pdf_path = md_path.with_name(md_path.stem + suffix)
         if not force and pdf_path.exists() and pdf_path.stat().st_mtime >= md_path.stat().st_mtime:
